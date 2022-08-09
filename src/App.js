@@ -1,11 +1,11 @@
 import "./App.css";
 import { Button } from "react-bootstrap";
+import Auth from "./routes/auth/auth.component";
 
 function App() {
   return (
     <div className="App">
-      <h1>I'am Working</h1>
-      <Button variant="primary"> Name </Button>
+      <Auth />
     </div>
   );
 }
