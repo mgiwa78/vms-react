@@ -20,7 +20,7 @@ const Auth = () => {
       <AuthContainerLeft>
         <AuthLoginTextContainer>
           {" "}
-          <Logodiv>SPECTRA</Logodiv>
+          <Logodiv>VMS</Logodiv>
           <AuthLoginText>
             Ensuring security for your Organizations and visitors
           </AuthLoginText>

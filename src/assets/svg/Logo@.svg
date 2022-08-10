@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="48" viewBox="0 0 200 48">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #2257a5;
+        font-size: 30px;
+        font-family: Sora-Bold, Sora;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g id="Group_48" data-name="Group 48" transform="translate(-272 -863)">
+    <rect id="Rectangle_8" data-name="Rectangle 8" class="cls-1" width="193" height="48" transform="translate(272 863)"/>
+    <text id="SPECTRA" class="cls-2" transform="translate(304 894)"><tspan x="0" y="0">SPECTRA</tspan></text>
+  </g>
+</svg>

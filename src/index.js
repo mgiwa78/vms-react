@@ -11,6 +11,7 @@ import AdminSignIn from "./pages/admin-sign-in/admin-sign-in.component";
 import EmployeeSignIn from "./pages/employee-sign-in/employee-sign-in.component";
 import CheckInPointSignIn from "./pages/security-point-sign-in/security-point-sign-in.component";
 import CheckPoint from "./pages/check-point-home/check-point-home.component";
+import AdminHome from "./pages/admin-home/admin-home.component";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,6 +25,7 @@ root.render(
           <Route path="checkpointlogin" element={<CheckInPointSignIn />} />
         </Route>
         <Route index path="checkpointhome" element={<CheckPoint />} />
+        <Route index path="adminhome" element={<AdminHome />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

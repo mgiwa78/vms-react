@@ -1,5 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router";
+import CustomBtn from "../../components/custom-btn/custom-btn.component";
+import { TextInput } from "../../components/form-elements/form-elements.component";
 import {
   AdminContainer,
   AdminContainerLeft,
@@ -21,6 +24,8 @@ import {
 } from "./admin-sign-in.styles";
 
 const AdminSignIn = () => {
+  const handleFormSubmit = (e) => {};
+  const Navigate = useNavigate();
   return (
     <AdminContainerRight>
       <AdminRightContainer>
@@ -28,15 +33,20 @@ const AdminSignIn = () => {
         <AdminSubText>Enter admin Id and password</AdminSubText>
 
         <AdminForm>
-          <AdminFormLabel>ID</AdminFormLabel>
-          <AdminFormInput placeholder="Admin ID"></AdminFormInput>
-          <AdminFormLabel>Password</AdminFormLabel>
-          <AdminFormInput
+          <TextInput label="ID" type="text" placeholder="Admin ID"></TextInput>
+          <TextInput
+            label="Password"
             type="password"
             placeholder="Admin Password"
-          ></AdminFormInput>
+          ></TextInput>
           <AdminFormBtm>
-            <Button>Sign In</Button>
+            <CustomBtn
+              handleClick={() => {
+                Navigate("/adminhome");
+              }}
+            >
+              Sign In
+            </CustomBtn>
           </AdminFormBtm>
         </AdminForm>
       </AdminRightContainer>
