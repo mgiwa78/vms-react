@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router";
 import CustomBtn from "../../components/custom-btn/custom-btn.component";
 import { TextInput } from "../../components/form-elements/form-elements.component";
 import {
@@ -16,6 +17,8 @@ import {
 } from "./employee-sign-in.styles";
 
 const EmployeeSignIn = () => {
+  const Navigate = useNavigate();
+
   return (
     <EmployeeContainerRight>
       <EmployeeRightContainer>
@@ -34,7 +37,13 @@ const EmployeeSignIn = () => {
             placeholder="Employee Password"
           ></TextInput>
           <EmployeeFormBtm>
-            <CustomBtn>Sign In</CustomBtn>
+            <CustomBtn
+              handleClick={() => {
+                Navigate("/employee");
+              }}
+            >
+              Sign In
+            </CustomBtn>
           </EmployeeFormBtm>
         </EmployeeForm>
       </EmployeeRightContainer>

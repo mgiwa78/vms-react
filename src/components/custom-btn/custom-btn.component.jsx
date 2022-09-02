@@ -1,12 +1,26 @@
 import { Button } from "react-bootstrap/Button";
 import React from "react";
-import { PrimarBtn } from "./custom-btn.styles";
+import { PrimaryBtn } from "./custom-btn.styles";
 
-const CustomBtn = ({ btnType, children, handleClick }) => {
+const CustomBtn = ({
+  checkIn,
+  form_btn,
+  lg,
+  btnType,
+  children,
+  handleClick,
+  state,
+}) => {
   return (
-    <PrimarBtn onClick={handleClick} className="baseBtn">
+    <PrimaryBtn
+      lg={lg}
+      form_btn={form_btn}
+      btnType={btnType}
+      onClick={handleClick}
+      className={`baseBtn ${checkIn ? "checkInBtn" : ""} ${state}`}
+    >
       {children}
-    </PrimarBtn>
+    </PrimaryBtn>
   );
 };
 

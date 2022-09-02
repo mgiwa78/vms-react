@@ -5,12 +5,20 @@ import {
   AdminNavList,
   AdminNavLogo,
   AdminNavTop,
+  ApprovalSvg,
+  DashSvg,
+  ManageSvg,
   MenuIcon,
+  ReportSvg,
+  SettingsSvg,
 } from "./admin-nav.styles";
 
 import Menu from "../../assets/svg/menu40.svg";
+import { useNavigate, useParams } from "react-router";
 
 const AdminNav = () => {
+  const Navigate = useNavigate();
+
   return (
     <AdminNavContainer>
       <AdminNavTop>
@@ -19,11 +27,27 @@ const AdminNav = () => {
         </AdminNavLogo>
 
         <AdminNavList>
-          <AdminNavItem>Dasboard</AdminNavItem>
-          <AdminNavItem>Manage</AdminNavItem>
-          <AdminNavItem>Reports</AdminNavItem>
-          <AdminNavItem>Aprovals</AdminNavItem>
-          <AdminNavItem>Settings</AdminNavItem>
+          <AdminNavItem onClick={() => Navigate("/adminhome")}>
+            <DashSvg />
+            {/* <NavIcon src={DashIcon} /> */}
+            Dasboard
+          </AdminNavItem>
+          <AdminNavItem onClick={() => Navigate("manage")}>
+            <ManageSvg />
+            Manage
+          </AdminNavItem>
+          <AdminNavItem onClick={() => Navigate("report")}>
+            <ReportSvg />
+            Reports
+          </AdminNavItem>
+          <AdminNavItem onClick={() => Navigate("approval")}>
+            <ApprovalSvg />
+            Aprovals
+          </AdminNavItem>
+          <AdminNavItem>
+            <SettingsSvg />
+            Settings
+          </AdminNavItem>
         </AdminNavList>
       </AdminNavTop>
     </AdminNavContainer>

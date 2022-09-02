@@ -4,14 +4,14 @@ import { ReactComponent as AuthLogin } from "../../assets/svg/admin-login.svg";
 export const AuthContainer = styled.div`
   display: flex;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 export const AuthContainerLeft = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 `;
 
@@ -33,7 +33,7 @@ export const AuthLoginText = styled.div`
 `;
 
 export const AuthLoginSvg = styled(AuthLogin)`
-  width: 100%;
+  width: 70%;
 `;
 export const Logodiv = styled.div`
   color: #0066ff;

@@ -1,48 +1,80 @@
 import styled from "styled-components/macro";
+import { ReactComponent as DashIcon } from "../../assets/svg/dash5.svg";
+import { ReactComponent as ManageIcon } from "../../assets/svg/manage1.svg";
+import { ReactComponent as ReportIcon } from "../../assets/svg/report1.svg";
+import { ReactComponent as ApprovalIcon } from "../../assets/svg/approval1.svg";
+import { ReactComponent as SettingsIcon } from "../../assets/svg/settings1.svg";
 
 import Menu from "../../assets/svg/menu_icon.svg";
 
 export const AdminNavContainer = styled.div`
   height: 100vh;
-  background-color: #071b72;
-  width: 300px;
+  background-color: #062132;
+  width: max-content;
+  padding: 40px;
+  padding-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  overflow: hidden !important;
+  position: fixed;
 `;
-export const AdminNavTop = styled.div`
-  padding-top: 30px;
-`;
+export const AdminNavTop = styled.div``;
 export const AdminNavList = styled.ul`
   margin: 0;
-  background-color: #ffffff3d;
+  background-color: #062132;
 
   margin-top: 60px;
   padding: 0;
   list-style: none;
-  width: 300px;
+  width: 200px;
   height: max-content;
 `;
+export const NavIcon = styled.img`
+  margin-right: 20px;
+`;
+export const DashSvg = styled(DashIcon)`
+  margin-right: 20px;
+`;
+export const ManageSvg = styled(ManageIcon)`
+  margin-right: 20px;
+`;
+export const ApprovalSvg = styled(ApprovalIcon)`
+  margin-right: 20px;
+`;
+export const ReportSvg = styled(ReportIcon)`
+  margin-right: 20px;
+`;
+export const SettingsSvg = styled(SettingsIcon)`
+  margin-right: 20px;
+`;
 export const AdminNavItem = styled.li`
-  color: white;
-  font-size: 20px;
+  color: #b5bcc2;
+  font-size: 16px;
   height: inherit;
   font-weight: 500;
-  padding: 15px 25px;
+  padding: 10px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  fill: #b5bcc2;
+
   &:hover {
-    background-color: #071b72;
+    fill: #4cbfb0;
+    background-color: #071b725e;
+    color: #4cbfb0;
   }
 `;
 export const AdminNavLogo = styled.div`
   justify-content: space-between;
   align-items: center;
-  padding: 0 26px;
+  padding: 0px;
   display: flex;
   font-weight: 700;
   text-transform: uppercase;
-  color: white;
+  color: #4cbfb0;
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
 `;
 export const MenuIcon = styled.img`
   margin-left: 15px;
