@@ -1,45 +1,28 @@
 import React, { useEffect, useState } from "react";
-import ValidUserCheckOut from "../check-in-valid-user/check-in-valid-user.component";
 import CustomBtn from "../custom-btn/custom-btn.component";
-import { FormRow } from "../edit-profile-form/edit-profile-form.styles";
 import { TextInput } from "../form-elements/form-elements.component";
 
 import {
   ListItem,
-  ListValue,
-  QRSvg,
   ValidUserCheckinContainer,
   ValidUserItem,
   ValidUserLeft,
   ValidUserList,
-  ValidUserListItem,
-  ValidUserProfile,
   ValidUserRight,
-  ValidUserRow,
-  ValidUserRowID,
-  ValidUserRowItem,
 } from "../check-in-valid-user/check-in-valid-user.styles";
-import ExitIcon from "../../assets/svg/logout.svg";
 
 import { CheckOutFormContainer } from "./check-out-form.style";
-import {
-  AddLogAction,
-  SetCheckInLogAction,
-  SetEmployeeAction,
-} from "../../store/employee/employee-actions";
+import { SetCheckInLogAction } from "../../store/employee/employee-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { SelectEmployeLog } from "../../store/employee/employee-selector";
-import CheckPointNav from "../check-point-nav/check-point-nav.component";
-import { Outlet, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import {
   FetchCheckInDataInDb,
   FetchUniqueUserData,
-  InsertCeckInDataInDb,
   InsertCeckOutDataInDb,
 } from "../../php/phpFuncs";
 
 const CheckOutForm = () => {
-  const Navigate = useNavigate();
   const EmployeLog = useSelector(SelectEmployeLog);
   const dispatch = useDispatch();
   const DefFormFields = {

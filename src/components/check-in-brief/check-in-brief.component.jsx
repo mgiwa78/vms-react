@@ -17,7 +17,6 @@ import {
 
 import { useSelector } from "react-redux";
 import { TextDrpDwn } from "../form-elements/form-elements.component";
-import { Col } from "react-bootstrap";
 
 const CheckInBrief = ({ name }) => {
   const EmployeeCheckInLog = useSelector(SelectEmployeLog);

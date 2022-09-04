@@ -5,8 +5,6 @@ import { ReactComponent as ReportIcon } from "../../assets/svg/report1.svg";
 import { ReactComponent as ApprovalIcon } from "../../assets/svg/approval1.svg";
 import { ReactComponent as SettingsIcon } from "../../assets/svg/settings1.svg";
 
-import Menu from "../../assets/svg/menu_icon.svg";
-
 export const AdminNavContainer = styled.div`
   height: 100vh;
   background-color: #062132;

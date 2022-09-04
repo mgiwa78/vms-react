@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components/macro";
 import Table from "react-bootstrap/Table";
 import Col from "react-bootstrap/Col";
-import { Container } from "react-bootstrap";
 
 export const HeaderContainer = styled.div`
   background-color: #071b72;

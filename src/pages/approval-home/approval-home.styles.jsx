@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components/macro";
 import Table from "react-bootstrap/Table";
 import Col from "react-bootstrap/Col";
-import { Container } from "react-bootstrap";
 
 export const ApprovalReportContainer = styled(Col)`
   background-color: #fff;

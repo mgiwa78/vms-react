@@ -1,7 +1,6 @@
 import React from "react";
 import { AdminWidgets } from "./dashboard.styles";
-import ExitIcon from "../../assets/svg/logout.svg";
-import UserIcon from "../../assets/svg/person.svg";
+
 import AdminHeader from "../admin-header/admin-header.component";
 import CheckInBrief from "../check-in-brief/check-in-brief.component";
 import ApprovalWidget from "../approval-widget/approval-widget.component";

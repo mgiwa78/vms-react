@@ -1,35 +1,21 @@
 import React, { useEffect, useState } from "react";
-import ValidUserCheckin from "../../components/check-in-valid-user/check-in-valid-user.component";
 import CustomBtn from "../../components/custom-btn/custom-btn.component";
-import { FormRow } from "../../components/edit-profile-form/edit-profile-form.styles";
 import { TextInput } from "../../components/form-elements/form-elements.component";
 
 import {
   ListItem,
-  ListValue,
-  QRSvg,
   ValidUserCheckinContainer,
   ValidUserItem,
   ValidUserLeft,
   ValidUserList,
-  ValidUserListItem,
-  ValidUserProfile,
   ValidUserRight,
-  ValidUserRow,
-  ValidUserRowID,
-  ValidUserRowItem,
 } from "../../components/check-in-valid-user/check-in-valid-user.styles";
-import ExitIcon from "../../assets/svg/logout.svg";
 
 import { CheckInFormContainer } from "./check-in-form.style";
-import {
-  AddLogAction,
-  SetCheckInLogAction,
-} from "../../store/employee/employee-actions";
+import { SetCheckInLogAction } from "../../store/employee/employee-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { SelectEmployeLog } from "../../store/employee/employee-selector";
-import CheckPointNav from "../../components/check-point-nav/check-point-nav.component";
-import { Outlet, useNavigate } from "react-router";
+
 import {
   FetchCheckInDataInDb,
   FetchUniqueUserData,
@@ -37,7 +23,6 @@ import {
 } from "../../php/phpFuncs";
 
 const CheckInForm = () => {
-  const Navigate = useNavigate();
   const EmployeLog = useSelector(SelectEmployeLog);
 
   const dispatch = useDispatch();
@@ -95,13 +80,6 @@ const CheckInForm = () => {
     )
       return alert("Invalid Entry");
 
-    const newPersonnel = {
-      ID: CheckInID,
-      POSITION: position,
-      NAME: name,
-      CHECKIN: time,
-      dept,
-    };
     const avaLog = EmployeLog.find(
       (log) => log.ID === CheckInID && !log.CHECKOUT
     );

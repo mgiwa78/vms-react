@@ -1,34 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Outlet } from "react-router";
 import AdminHeader from "../../components/admin-header/admin-header.component";
 import AdminNav from "../../components/admin-nav/admin-nav.component";
-import { AdminNavLogo } from "../../components/admin-nav/admin-nav.styles";
-import CheckInBrief from "../../components/check-in-brief/check-in-brief.component";
-import Dashboard from "../../components/dashboard/dashboard.component";
-import {
-  AdminBody,
-  AdminHomeContainer,
-  AdminWidgets,
-} from "./admin-home.styles";
-import axios from "axios";
 
-import { useSelector } from "react-redux";
-import { FetchUserDataAsync } from "../../php/phpFuncs";
-import {
-  SetCheckInLogAction,
-  SetEmployeeAction,
-} from "../../store/employee/employee-actions";
-import {
-  SelectEmployeLog,
-  SelectEmployeData,
-} from "../../store/employee/employee-selector";
-import { useDispatch } from "react-redux";
+import { AdminBody, AdminHomeContainer } from "./admin-home.styles";
 
 const AdminHome = () => {
-  const dispatch = useDispatch();
-
-  const [initialCheckedIn, setInitialCheckedIn] = useState([]);
-
   // mainData.forEach((data1) => {
   //   let formdata = new FormData();
 

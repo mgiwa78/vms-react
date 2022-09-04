@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap/Button";
 import React from "react";
 import { PrimaryBtn } from "./custom-btn.styles";
 

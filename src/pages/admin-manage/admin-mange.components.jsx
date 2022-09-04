@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   AdminManageBody,
   AdminManageBodyRow,
-  AdminManageComponents,
   AdminManageContainer,
   AdminManageSECContainer,
   AdminManageTable,
@@ -14,26 +13,12 @@ import {
   AMBody,
   AMTd,
   AMTH,
-  HeaderContainer,
-  HeaderExitIcon,
-  HeaderItem,
-  HeaderItems,
-  HeaderTtitle,
 } from "./admin-manage.styles";
-import ExitIcon from "../../assets/svg/logout.svg";
-import ApprovalWidget from "../../components/approval-widget/approval-widget.component";
+
 import AddProfileForm from "../../components/add-visitor-form/add-visitor-form.component";
 import EditProfileForm from "../../components/edit-profile-form/edit-profile-form.component";
-import axios from "axios";
 import { useSelector } from "react-redux";
-import {
-  SelectEmployeLog,
-  SelectEmployeData,
-} from "../../store/employee/employee-selector";
-import { FetchUniqueUserData } from "../../php/phpFuncs";
-import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { SetCheckInLogAction } from "../../store/employee/employee-actions";
+import { SelectEmployeData } from "../../store/employee/employee-selector";
 import AdminHeader from "../../components/admin-header/admin-header.component";
 import { Col } from "react-bootstrap";
 import {
@@ -42,8 +27,6 @@ import {
 } from "../../components/form-elements/form-elements.component";
 
 const AdminManage = () => {
-  const Navigate = useNavigate();
-
   const EmployeeData = useSelector(SelectEmployeData);
 
   const [filteredArray, SetFilteredArray] = useState({});

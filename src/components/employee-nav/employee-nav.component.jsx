@@ -5,16 +5,13 @@ import {
   EmployeeNavList,
   EmployeeNavLogo,
   EmployeeNavTop,
-  ApprovalSvg,
   DashSvg,
-  ManageSvg,
   MenuIcon,
-  ReportSvg,
   SettingsSvg,
 } from "./employee-nav.styles";
 
 import Menu from "../../assets/svg/menu40.svg";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 
 const EmployeeNav = () => {
   const Navigate = useNavigate();

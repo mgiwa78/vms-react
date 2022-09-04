@@ -4,27 +4,15 @@ import { useNavigate } from "react-router";
 import CustomBtn from "../../components/custom-btn/custom-btn.component";
 import { TextInput } from "../../components/form-elements/form-elements.component";
 import {
-  AdminContainer,
-  AdminContainerLeft,
   AdminContainerRight,
   AdminForm,
   AdminFormBtm,
-  AdminFormInput,
-  AdminFormLabel,
-  AdminLoginSvg,
-  AdminLoginText,
-  AdminLoginTextContainer,
   AdminRightContainer,
   AdminRightTitle,
   AdminSubText,
-  LoginNav,
-  Logo,
-  Logodiv,
-  LogoSvg,
 } from "./admin-sign-in.styles";
 
 const AdminSignIn = () => {
-  const handleFormSubmit = (e) => {};
   const Navigate = useNavigate();
   return (
     <AdminContainerRight>

@@ -4,11 +4,7 @@ import {
   FormRow,
   FormTitle,
 } from "./edit-profile-form.styles";
-import {
-  FormInput,
-  FormInputLabel,
-  TextDrpDwnSelect,
-} from "../form-elements/form-elements.styles";
+import { FormInputLabel } from "../form-elements/form-elements.styles";
 import {
   TextDrpDwn,
   TextInput,
@@ -28,7 +24,7 @@ import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { Col, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 const EditProfileForm = ({ lg }) => {
   const DefFormFields = {
@@ -135,7 +131,6 @@ const EditProfileForm = ({ lg }) => {
         duration: UserData.DURATION,
         pesRes: UserData.PE_RES,
       });
-      setOrginDate(Number(UserData.DATE));
       setStartDate(Number(UserData.DURATION.split("-")[0]));
       setStopDate(Number(UserData.DURATION.split("-")[1]));
     }
@@ -155,11 +150,9 @@ const EditProfileForm = ({ lg }) => {
   };
   const color = "#000";
 
-  const [orginDate, setOrginDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
   const [stopDate, setStopDate] = useState(new Date());
   const handleDateChange = (key, date) => {
-    const dateToSet = new Date(date);
     console.log(date);
     switch (key) {
       case "start":

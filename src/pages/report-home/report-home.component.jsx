@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router";
-import AdminHeader from "../../components/admin-header/admin-header.component";
-import AdminNav from "../../components/admin-nav/admin-nav.component";
-import { AdminNavLogo } from "../../components/admin-nav/admin-nav.styles";
-import ApprovalHeader from "../../components/approval-header/approval-header.component";
-import ApprovalReport from "../../components/approval-widget/approval-widget.component";
-import CheckInBrief from "../../components/check-in-brief/check-in-brief.component";
-import Dashboard from "../../components/dashboard/dashboard.component";
+
 import { ReportBody, RPTPageBtn, RPTPagination } from "./report-home.styles";
 
 import {
@@ -16,36 +9,21 @@ import {
   RHead,
   RRow,
   ReportContainer,
-  ReportTitle,
   ReportTable,
   ReportTableContainer,
   ReportHeader,
-  HeaderContainer,
-  HeaderExitIcon,
-  HeaderItem,
-  HeaderItems,
-  HeaderTtitle,
 } from "./report-home.styles";
 import {
   TextDrpDwn,
   TextInput,
 } from "../../components/form-elements/form-elements.component";
-import { FetchCheckInDataInDb, FetchUserDataAsync } from "../../php/phpFuncs";
-import {
-  SetCheckInLogAction,
-  SetEmployeeAction,
-} from "../../store/employee/employee-actions";
+import { FetchCheckInDataInDb } from "../../php/phpFuncs";
+import { SetCheckInLogAction } from "../../store/employee/employee-actions";
 import { useDispatch } from "react-redux";
-import {
-  SelectEmployeLog,
-  SelectEmployeData,
-} from "../../store/employee/employee-selector";
+import { SelectEmployeLog } from "../../store/employee/employee-selector";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import ExitIcon from "../../assets/svg/logout.svg";
 
 const ReportHome = () => {
-  const Navigate = useNavigate();
   const EmployeLog = useSelector(SelectEmployeLog);
 
   const dispatch = useDispatch();
@@ -53,8 +31,6 @@ const ReportHome = () => {
   const [filteredArray, SetFilteredArray] = useState({});
   const [displayReports, setDisplayReports] = useState([]);
   const [DefReports, setDefReports] = useState([]);
-
-  const EmployeeData = useSelector(SelectEmployeData);
 
   const fetchLogsData = async () => {
     const data = await FetchCheckInDataInDb({ key: "ACTION", value: 12 });
@@ -72,13 +48,6 @@ const ReportHome = () => {
     setDefReports(EmployeLog);
     SetpageMax(Math.ceil(EmployeLog.length / DefaultMaxPerPage));
   }, [EmployeLog]);
-  const Ant = async () => {
-    const a = await FetchUserDataAsync({ key: "ACTION", value: 1 });
-    const b = await FetchCheckInDataInDb({ key: "ACTION", value: 12 });
-    dispatch(SetCheckInLogAction(b));
-
-    dispatch(SetEmployeeAction(a));
-  };
 
   useEffect(() => {
     if (Object.keys(filteredArray).length === 0) return;

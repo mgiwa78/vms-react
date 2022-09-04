@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components/macro";
-import Button from "react-bootstrap/Button";
 
 export const PrimaryBtn = styled.div`
   background-color: #0d57c571;

@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import { Col, Container, Table } from "react-bootstrap";
+import { Col, Table } from "react-bootstrap";
 
 export const CheckInBriefContainer = styled(Col)`
   background-color: #fff;

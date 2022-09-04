@@ -15,7 +15,6 @@ import {
 } from "./approval-widget.styles";
 import data from "../../userData.json";
 import { TextDrpDwn } from "../form-elements/form-elements.component";
-import { Col } from "react-bootstrap";
 
 const ApprovalWidget = ({ lg }) => {
   const [filteredArray, SetFilteredArray] = useState({});

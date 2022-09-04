@@ -5,10 +5,6 @@ import {
   FormTitle,
 } from "./approve-profile-form.styles";
 import {
-  FormInput,
-  TextDrpDwnSelect,
-} from "../form-elements/form-elements.styles";
-import {
   TextDrpDwn,
   TextInput,
 } from "../form-elements/form-elements.component";
@@ -21,7 +17,6 @@ import {
   FetchApprovalsDataInDb,
   FetchCheckInDataInDb,
   FetchUserDataAsync,
-  SetApprovalReqDataInDb,
 } from "../../php/phpFuncs";
 import {
   SetApprovalRequestAction,
@@ -33,7 +28,6 @@ import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { Col, Row } from "react-bootstrap";
 
 const ApproveProfileForm = ({ lg, approvalsFields }) => {
   const dispatch = useDispatch();
@@ -62,7 +56,6 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
     dept: "",
     personnel_ID: "",
   };
-  const { approvalID } = approvalsFields;
   const [formFields, SetFormFields] = useState({ ...approvalsFields });
 
   const [startDate, setStartDate] = useState(Date.now());
@@ -113,27 +106,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
     if (name === "personnel_ID") return;
     SetFormFields({ ...formFields, [name]: value });
   };
-  const handleGetDate = (date) => {
-    console.log(date);
-    const months = {
-      1: "jan",
-      2: "Feb",
-      3: "Mar",
-      4: "Apr",
-      5: "May",
-      6: "Jun",
-      7: "Jul",
-      8: "Aug",
-      9: "Sep",
-      10: "Oct",
-      11: "Nov",
-      12: "Dec",
-    };
 
-    return `${date.getFullYear()}-${
-      months[date.getMonth()]
-    }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
-  };
   const [BtnState, setBtnState] = useState("Update");
 
   const handleDatabaseUpdate = async (e) => {

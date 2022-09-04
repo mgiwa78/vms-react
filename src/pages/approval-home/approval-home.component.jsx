@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router";
-import AdminHeader from "../../components/admin-header/admin-header.component";
-import AdminNav from "../../components/admin-nav/admin-nav.component";
-import { AdminNavLogo } from "../../components/admin-nav/admin-nav.styles";
-import ApprovalHeader from "../../components/approval-header/approval-header.component";
-import ApprovalReport from "../../components/approval-widget/approval-widget.component";
-import CheckInBrief from "../../components/check-in-brief/check-in-brief.component";
-import Dashboard from "../../components/dashboard/dashboard.component";
+
 import {
   ApprovalBody,
   ApprovalBtn,
-  ApprovalHomeContainer,
 } from "./approval-home.styles";
 
 import {
@@ -25,24 +17,20 @@ import {
   ApprovalReportTableContainer,
   ApprovalReportHeader,
 } from "./approval-home.styles";
-import data from "../../userData.json";
 import {
   TextDrpDwn,
   TextInput,
 } from "../../components/form-elements/form-elements.component";
-import { FetchApprovalsDataInDb, FetchUserDataAsync } from "../../php/phpFuncs";
+import { FetchApprovalsDataInDb } from "../../php/phpFuncs";
 import {
   SetApprovalRequestAction,
-  SetEmployeeAction,
 } from "../../store/employee/employee-actions";
 import { useDispatch } from "react-redux";
 import {
   SelectApprovalRequests,
-  SelectEmployeData,
 } from "../../store/employee/employee-selector";
 import { useSelector } from "react-redux";
 import ApproveProfileForm from "../../components/approve-profile-form/approve-profile-form.component";
-import CustomBtn from "../../components/custom-btn/custom-btn.component";
 
 const ApprovalHome = () => {
   const dispatch = useDispatch();
@@ -51,12 +39,8 @@ const ApprovalHome = () => {
   const [displayApprovals, setDisplayApprovals] = useState([]);
   const [DefApprovals, setDefApprovals] = useState([]);
 
-  const EmployeeData = useSelector(SelectEmployeData);
   const ApprovalRequests = useSelector(SelectApprovalRequests);
-  const Ant = async () => {
-    const a = await FetchUserDataAsync({ key: "ACTION", value: 1 });
-    dispatch(SetEmployeeAction(a));
-  };
+
   const FetchApprovalRequestsAsync = async () => {
     const a = await FetchApprovalsDataInDb();
 
