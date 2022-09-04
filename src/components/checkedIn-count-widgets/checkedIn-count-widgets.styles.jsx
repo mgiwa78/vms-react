@@ -12,6 +12,7 @@ export const CheckedInWGTContainer = styled(Col)`
   font-size: 28px;
   border-radius: 8px;
   border: 1px solid #00000021;
+  margin-bottom: 30px;
 `;
 export const CheckedInWGTTitle = styled.div``;
 export const CheckedInWGTCount = styled.div`

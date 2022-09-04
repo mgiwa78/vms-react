@@ -53,7 +53,7 @@ const CheckInForm = () => {
 
   const [formFields, SetFormFields] = useState(DefFormFields);
   const [fullUserData, SetfullUserData] = useState({});
-  const [confirmState, setConfirmState] = useState("Confirm");
+  const [confirmState, setConfirmState] = useState("Confirm Check-in");
   const [VerifyState, setVerifyState] = useState("Verify");
   const [timeParse, setTimeParse] = useState("");
   const { CheckInID, position, purpose, name, dept, time } = formFields;
@@ -83,7 +83,7 @@ const CheckInForm = () => {
   }, [time]);
 
   const handleConfirmPersonnel = (e) => {
-    if (confirmState !== "Confirm") return;
+    if (confirmState !== "Confirm Check-in") return;
     if (VerifyState !== "Verified") return;
 
     if (
@@ -114,7 +114,7 @@ const CheckInForm = () => {
         setTimeout(() => {
           SetFormFields({ ...DefFormFields });
           setTimeParse("");
-          setConfirmState("Confirm");
+          setConfirmState("Confirm Check-in");
           setVerifyState("Verify");
         }, 500);
       }, 50);
@@ -141,7 +141,7 @@ const CheckInForm = () => {
         setTimeout(() => {
           SetFormFields({ ...DefFormFields });
           setTimeParse("");
-          setConfirmState("Confirm");
+          setConfirmState("Confirm Check-in");
           setVerifyState("Verify");
         }, 300);
       }, 800);
@@ -177,7 +177,7 @@ const CheckInForm = () => {
         <TextInput
           handleChange={(e) => handleInputChange(e)}
           bg={"#000"}
-          lg={3}
+          lg={12}
           value={CheckInID}
           name="CheckInID"
           label="ID"
@@ -250,7 +250,7 @@ const CheckInForm = () => {
             </ValidUserItem>
 
             <ValidUserItem>
-              <ListItem>Check-In:</ListItem>
+              <ListItem>Check-In Time:</ListItem>
 
               <TextInput
                 InputPosition="form_input"
@@ -278,7 +278,7 @@ const CheckInForm = () => {
             <CustomBtn
               confirmState={confirmState}
               state={`${
-                confirmState === "Confirm"
+                confirmState === "Confirm Check-in"
                   ? "active"
                   : confirmState === "Rejected"
                   ? "danger"

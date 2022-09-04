@@ -20,12 +20,15 @@ import { FetchCheckInDataInDb, FetchUserDataAsync } from "../../php/phpFuncs";
 
 import Col from "react-bootstrap/Col";
 import CheckedInWGT from "../checkedIn-count-widgets/checkedIn-count-widgets.component";
+import ProfileWGT from "../profiles-count-widgets/profiles-count-widgets.component";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const EmployeeCheckInLog = useSelector(SelectEmployeLog);
 
   const EmployeeData = useSelector(SelectEmployeData);
+  const [checkedInCount, setCheckedInCount] = useState(0);
+  const [profileCount, setProfileCount] = useState(0);
 
   const Ant = async () => {
     const a = await FetchUserDataAsync({ key: "ACTION", value: 1 });
@@ -40,6 +43,18 @@ const Dashboard = () => {
     console.log("no");
     Ant();
   }, []);
+  useEffect(() => {
+    if (!EmployeeData) return;
+    setProfileCount(EmployeeData.length);
+    if (EmployeeCheckInLog.length === 0) return;
+    const InCount = EmployeeCheckInLog.filter(
+      (Log) =>
+        (Log.CHECKIN && !Log.CHECKOUT) || (Log.CHECKIN && Log.CHECKOUT === "0")
+    );
+    setCheckedInCount(InCount?.length);
+
+    console.log("no");
+  }, [EmployeeData]);
 
   return (
     <>
@@ -48,7 +63,8 @@ const Dashboard = () => {
         <ApprovalWidget />
         <CheckInBrief name="Just Checked In" />
         <Col lg={2}>
-          <CheckedInWGT></CheckedInWGT>
+          <CheckedInWGT value={checkedInCount}></CheckedInWGT>
+          <ProfileWGT value={profileCount}></ProfileWGT>
         </Col>
       </AdminWidgets>
     </>

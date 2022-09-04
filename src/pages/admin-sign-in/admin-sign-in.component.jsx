@@ -33,11 +33,18 @@ const AdminSignIn = () => {
         <AdminSubText>Enter admin Id and password</AdminSubText>
 
         <AdminForm>
-          <TextInput label="ID" type="text" placeholder="Admin ID"></TextInput>
+          <TextInput
+            InputPosition="form_input_signIn"
+            label="ID"
+            type="text"
+            placeholder="Admin ID"
+          ></TextInput>
+
           <TextInput
             label="Password"
             type="password"
             placeholder="Admin Password"
+            InputPosition="form_input_signIn"
           ></TextInput>
 
           <AdminFormBtm>

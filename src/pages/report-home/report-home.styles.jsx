@@ -45,14 +45,17 @@ export const ReportContainer = styled(Col)`
   padding: 20px 20px;
   border: 1px solid #00000021;
 
+  background-color: #fff;
   display: flex;
+  position: relative;
   flex-direction: column;
 `;
 export const ReportTableContainer = styled.div`
-  max-height: 450px;
-  background-color: #fff;
-  padding: 0 20px;
+  max-height: 500px;
+  min-height: 500px;
+  padding: 0 40px;
   overflow-y: scroll;
+  margin-bottom: 30px;
   border-top: 1px solid #071b729e;
 `;
 export const ReportTable = styled(Table)``;
@@ -138,4 +141,36 @@ export const Reports = styled.div`
 `;
 export const ReportBody = styled.div`
   margin-top: 150px;
+`;
+
+export const RPTPagination = styled.div`
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  height: 50px;
+  background-color: #00000016;
+  margin-top: 20px;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`;
+export const RPTPageBtn = styled.div`
+  width: max-content;
+  height: max-content;
+  padding: 2px 10px;
+  min-height: 30px;
+  min-width: 32px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #b3b3b3a8;
+  &:hover {
+    background-color: #919090;
+  }
+  &.disabled {
+    background-color: #d7d7d77f;
+  }
 `;

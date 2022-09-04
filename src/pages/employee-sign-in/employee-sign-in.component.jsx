@@ -30,11 +30,13 @@ const EmployeeSignIn = () => {
             type={"text"}
             label="ID"
             placeholder="Employee ID"
+            InputPosition="form_input_signIn"
           ></TextInput>
           <TextInput
             label="Password"
             type="password"
             placeholder="Employee Password"
+            InputPosition="form_input_signIn"
           ></TextInput>
           <EmployeeFormBtm>
             <CustomBtn

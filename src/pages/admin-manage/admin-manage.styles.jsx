@@ -14,6 +14,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   color: #fff;
   padding: 0 50px;
+  padding-bottom: 100px;
   border-radius: 8px;
   margin-bottom: 30px;
   box-shadow: 1px 1px 9px #071b7247;
@@ -47,6 +48,7 @@ export const AdminManageBody = styled.div`
 `;
 export const AdminManageBodyRow = styled(Row)`
   display: flex;
+
   &.widgwts {
   }
 `;
@@ -56,25 +58,45 @@ export const AdminManageTable = styled(Table)`
 `;
 export const AdminManageTableTitle = styled.h3`
   color: #000;
-  position: sticky;
   background-color: #fff;
-  top: -20px;
   height: max-content;
-  padding-top: 15px;
-  padding-bottom: 20px;
   font-weight: 700;
 `;
 export const AdminManageTableTitleContainer = styled.div``;
+export const AdminManageTableHead = styled.div`
+  width: 100%;
+  padding: 20px 20px 0px 20px;
+  display: flex;
+  height: 85px;
+  z-index: -1;
+  border-bottom: 1px solid #00000021;
+
+  justify-content: space-between;
+  .header_class {
+    display: flex;
+
+    width: 500px;
+    justify-content: space-between;
+  }
+`;
+export const AdminManageSECContainer = styled(Col)`
+  border-radius: 10px;
+  margin-bottom: 50px;
+  border: 1px solid #00000021;
+  min-height: 800px;
+  background-color: #fff;
+`;
 export const AdminManageTableContainer = styled(Col)`
   border-radius: 10px;
-  border: 1px solid #00000021;
+  margin-bottom: 50px;
+
   &::-webkit-scrollbar {
     display: none;
   }
 
-  background-color: #fff;
-  padding: 20px 20px 0 20px;
-  max-height: 500px;
+  padding: 0px 20px 0 20px;
+  max-height: 700px;
+  width: 100%;
   overflow-y: scroll;
 `;
 export const AdminManageTRow = styled.tr`
@@ -89,7 +111,8 @@ export const AdminManageThead = styled.thead`
   color: #00000068;
   position: sticky;
   background-color: #fff;
-  top: 40px;
+  top: -1px;
+  position: sticky;
 `;
 export const AMTH = styled.th``;
 export const AMTd = styled.td`

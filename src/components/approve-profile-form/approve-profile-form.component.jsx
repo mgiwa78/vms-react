@@ -90,6 +90,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
 
   const handleClearFormFileds = (e) => {
     // FetchUniqueUserData(personnel_ID);
+    setBtnState("Update");
     SetFormFields({
       ...DefFormFields,
     });
@@ -159,14 +160,17 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
         const beginDate = new Date(startDate);
         console.log(beginDate, startDate);
         console.log(stopDate, "--", startDate);
+        console.log(beginDate);
         const duration = `${
           typeof startDate === "number"
-            ? (beginDate.getFullYear(),
-              beginDate.getMonth(),
-              beginDate.getDate(),
-              beginDate.getHours(),
-              beginDate.getMinutes(),
-              beginDate.getSeconds())
+            ? Date.UTC(
+                beginDate.getFullYear(),
+                beginDate.getMonth(),
+                beginDate.getDate(),
+                beginDate.getHours(),
+                beginDate.getMinutes(),
+                beginDate.getSeconds()
+              )
             : (startDate.getFullYear(),
               startDate.getMonth(),
               startDate.getDate(),

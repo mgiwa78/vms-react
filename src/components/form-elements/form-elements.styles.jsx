@@ -33,7 +33,6 @@ export const FormInput = styled.input`
     height: 47px;
     width: 300px;
     height: 36px;
-    margin-top: 5px;
   }
   ${({ bg }) => css`
     background-color: #d1d1d165;
@@ -61,6 +60,16 @@ export const FormInput = styled.input`
           height: 32px;
           border-radius: 5px;
           margin-right: 20px;
+          padding-top: 0.2rem;
+          padding-bottom: 0.2rem;
+        `
+      : InputPosition === "form_input_signIn"
+      ? css`
+          width: 100%;
+          font-size: 17px;
+          border-radius: 5px;
+          margin-bottom: 10px;
+
           padding-top: 0.2rem;
           padding-bottom: 0.2rem;
         `

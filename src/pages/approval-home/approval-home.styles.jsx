@@ -28,7 +28,8 @@ export const ApprovalReportHeader = styled.div`
   align-content: flex-start;
   .header_class {
     display: flex;
-    width: 430px;
+
+    width: 500px;
     justify-content: space-between;
   }
 `;

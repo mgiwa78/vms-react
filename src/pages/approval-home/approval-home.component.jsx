@@ -69,11 +69,11 @@ const ApprovalHome = () => {
   }, []);
 
   useEffect(() => {
+    console.log(filteredArray);
     if (Object.keys(filteredArray).length === 0) return;
     if (filteredArray.sortedArray?.length === 0) return;
 
     setDisplayApprovals(filteredArray.sortedArray);
-    console.log(ApprovalRequests);
   }, [filteredArray]);
 
   useEffect(() => {
@@ -109,18 +109,27 @@ const ApprovalHome = () => {
         SearchValue[0].toUpperCase() +
         SearchValue.slice(1, SearchValue.length + 1);
       if (!DefApprovals) return;
-
       const sortedArray = DefApprovals.filter((PersonLog) => {
-        PersonLog.name.includes(patchedSearchValu) &&
-          console.log(PersonLog.name);
         return (
-          PersonLog.name.includes(patchedSearchValu) ||
-          PersonLog.name.includes(SearchValue) ||
-          PersonLog.time.includes(SearchValue)
+          PersonLog.REQUESTED_BY.includes(patchedSearchValu) ||
+          PersonLog.REQUESTED_BY.includes(SearchValue) ||
+          PersonLog.DUE_DATE.includes(SearchValue)
         );
       });
-
-      SetFilteredArray({ sortedArray, SearchValue });
+      const emptyarray = {
+        sortedArray: [
+          {
+            NAME: "",
+            PRIORITY: "",
+            REQUESTED_BY: "",
+            PURPOSE: "",
+            APPROVAL_ID: "",
+          },
+        ],
+      };
+      sortedArray.length !== 0
+        ? SetFilteredArray({ sortedArray, SearchValue })
+        : SetFilteredArray({ ...emptyarray, SearchValue });
     }
   };
   const handleSortAction = (e, arrayToSort, SearchValue) => {
@@ -152,8 +161,8 @@ const ApprovalHome = () => {
         const sortedArray = arrayToSort;
 
         sortedArray.sort(function (a, b) {
-          const aFirstLetter = a.name[0];
-          const bFirstLetter = b.name[0];
+          const aFirstLetter = a.REQUESTED_BY[0];
+          const bFirstLetter = b.REQUESTED_BY[0];
 
           if (aFirstLetter > bFirstLetter) return 1;
           if (aFirstLetter < bFirstLetter) return -1;
@@ -166,8 +175,8 @@ const ApprovalHome = () => {
         const sortedArray = arrayToSort;
 
         sortedArray.sort(function (a, b) {
-          const aFirstLetter = a.purpose[0];
-          const bFirstLetter = b.purpose[0];
+          const aFirstLetter = a.PURPOSE[0];
+          const bFirstLetter = b.PURPOSE[0];
 
           if (aFirstLetter > bFirstLetter) return 1;
           if (aFirstLetter < bFirstLetter) return -1;
@@ -180,8 +189,8 @@ const ApprovalHome = () => {
         const sortedArray = arrayToSort;
 
         sortedArray.sort(function (a, b) {
-          const aTime = a.time.split("-").join("");
-          const bTime = b.time.split("-").join("");
+          const aTime = a.DUE_DATE.split("-").join("");
+          const bTime = b.DUE_DATE.split("-").join("");
 
           if (aTime > bTime) return 1;
           if (aTime < bTime) return -1;
@@ -208,8 +217,19 @@ const ApprovalHome = () => {
   });
 
   const handleApproveBtn = (e, approvalItem) => {
+    if (
+      !(
+        approvalItem.POSITIION ||
+        approvalItem.NAME ||
+        approvalItem.PRIORITY ||
+        approvalItem.PURPOSE ||
+        approvalItem.REQUESTED_BY ||
+        approvalItem.PURPOSE ||
+        approvalItem.APPROVAL_ID
+      )
+    )
+      return;
     e.preventDefault();
-    console.log(approvalItem);
     const enddate = calcEndTime(approvalItem.TIME_LENGHT);
     setApprovalsFields({
       position: approvalItem.POSITIION,
@@ -294,33 +314,50 @@ const ApprovalHome = () => {
               </AWRow>
             </AWHead>
             <AWBody>
-              {displayApprovals.map((approvalItem) => {
-                const rand = Math.random() * 10000000;
-                const regDate = new Date(Number(`${approvalItem.DUE_DATE}`));
+              {console.log(displayApprovals)}
+              {displayApprovals
+                ? displayApprovals.map((approvalItem) => {
+                    const rand = Math.random() * 10000000;
+                    const regDate = new Date(
+                      Number(`${approvalItem.DUE_DATE}`)
+                    );
 
-                return (
-                  <AWRow key={rand}>
-                    <AWCell>{approvalItem.APPROVAL_ID}</AWCell>
-                    <AWCell priority={`${approvalItem.PRIORITY}`}>
-                      <span className="priority">{approvalItem.PRIORITY}</span>
-                    </AWCell>
+                    return (
+                      <AWRow key={rand}>
+                        <AWCell>{approvalItem.APPROVAL_ID}</AWCell>
+                        <AWCell priority={`${approvalItem.PRIORITY}`}>
+                          <span className="priority">
+                            {approvalItem.PRIORITY}
+                          </span>
+                        </AWCell>
 
-                    <AWCell>{`${regDate.getFullYear()}-${
-                      months[regDate.getMonth() + 1]
-                    }-${regDate.getDate()}`}</AWCell>
-                    <AWCell>{approvalItem.NAME}</AWCell>
-                    <AWCell>{approvalItem.PURPOSE}</AWCell>
-                    <AWCell>
-                      {" "}
-                      <ApprovalBtn
-                        onClick={(e) => handleApproveBtn(e, approvalItem)}
-                      >
-                        Approve
-                      </ApprovalBtn>
-                    </AWCell>
-                  </AWRow>
-                );
-              })}
+                        <AWCell>
+                          {approvalItem.DUE_DATE
+                            ? `${regDate?.getFullYear()}-${
+                                months[regDate.getMonth() + 1]
+                              }-${regDate.getDate()}`
+                            : ""}
+                        </AWCell>
+                        <AWCell>{approvalItem.REQUESTED_BY}</AWCell>
+                        <AWCell>{approvalItem.PURPOSE}</AWCell>
+                        <AWCell>
+                          {" "}
+                          <ApprovalBtn
+                            onClick={(e) => handleApproveBtn(e, approvalItem)}
+                          >
+                            {approvalItem.REQUESTED_BY ||
+                            approvalItem.REQUESTED_BY ||
+                            approvalItem.DUE_DATE ||
+                            approvalItem.PRIORITY ||
+                            approvalItem.APPROVAL_ID
+                              ? "Approve"
+                              : "Invalid"}
+                          </ApprovalBtn>
+                        </AWCell>
+                      </AWRow>
+                    );
+                  })
+                : ""}
             </AWBody>
           </ApprovalReportTable>
         </ApprovalReportTableContainer>

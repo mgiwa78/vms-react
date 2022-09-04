@@ -10,6 +10,8 @@ import {
   ApprovalWidgetTable,
   ApprovalWidgetTableContainer,
   ApprovalWidgetHeader,
+  AWPagination,
+  AWPageBtn,
 } from "./approval-widget.styles";
 import data from "../../userData.json";
 import { TextDrpDwn } from "../form-elements/form-elements.component";
@@ -18,10 +20,14 @@ import { Col } from "react-bootstrap";
 const ApprovalWidget = ({ lg }) => {
   const [filteredArray, SetFilteredArray] = useState({});
   const [displayApprovals, setDisplayApprovals] = useState([]);
+  const DefaultMaxPerPage = 10;
+  const [pageNumber, SetpageNumber] = useState(1);
+  const [pageMax, SetpageMax] = useState(1);
 
   useEffect(() => {
     if (!filteredArray.length) return;
     setDisplayApprovals(filteredArray.sortedArray);
+    SetpageNumber(1);
   }, [filteredArray]);
 
   useEffect(() => {
@@ -34,6 +40,7 @@ const ApprovalWidget = ({ lg }) => {
         purpose: dat.title,
       };
     });
+    SetpageMax(Math.ceil(distApp.length / DefaultMaxPerPage));
     setDisplayApprovals(distApp);
   }, []);
 
@@ -113,6 +120,27 @@ const ApprovalWidget = ({ lg }) => {
         break;
     }
   };
+
+  const handleSetpageNumber = (actionCase, num) => {
+    switch (actionCase) {
+      case "dec":
+        if (num - 1 !== 0) {
+          return SetpageNumber(num - 1);
+        }
+        break;
+      case "inc":
+        console.log(actionCase, num + 1, pageMax);
+
+        if (num + 1 > pageMax) return;
+        SetpageNumber(num + 1);
+
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <ApprovalWidgetContainer lg={4}>
       <ApprovalWidgetHeader>
@@ -135,23 +163,44 @@ const ApprovalWidget = ({ lg }) => {
             </AWRow>
           </AWHead>
           <AWBody>
-            {displayApprovals.map((dat) => {
-              const rand = Math.random() * 10000000;
+            {displayApprovals
+              .filter((app, index) => {
+                const k = DefaultMaxPerPage * pageNumber;
 
-              return (
-                <AWRow key={rand}>
-                  <AWCell priority={`${dat.priority}`}>
-                    <span className="priority">{dat.priority}</span>
-                  </AWCell>
-                  <AWCell>{dat.time}</AWCell>
-                  <AWCell>{dat.name}</AWCell>
-                  <AWCell>{dat.purpose}</AWCell>
-                </AWRow>
-              );
-            })}
+                return index >= k - DefaultMaxPerPage && index <= k;
+              })
+              .map((dat) => {
+                const rand = Math.random() * 10000000;
+
+                return (
+                  <AWRow key={rand}>
+                    <AWCell priority={`${dat.priority}`}>
+                      <span className="priority">{dat.priority}</span>
+                    </AWCell>
+                    <AWCell>{dat.time}</AWCell>
+                    <AWCell>{dat.name}</AWCell>
+                    <AWCell>{dat.purpose}</AWCell>
+                  </AWRow>
+                );
+              })}
           </AWBody>
         </ApprovalWidgetTable>
       </ApprovalWidgetTableContainer>
+      <AWPagination>
+        <AWPageBtn
+          className={`${pageNumber - 1 === 0 ? "disabled" : ""}`}
+          onClick={() => handleSetpageNumber("dec", pageNumber)}
+        >
+          {pageNumber - 1 === 0 ? " " : pageNumber - 1}
+        </AWPageBtn>
+        <AWPageBtn>{pageNumber}</AWPageBtn>
+        <AWPageBtn
+          className={`${pageNumber + 1 > pageMax ? "disabled" : ""}`}
+          onClick={() => handleSetpageNumber("inc", pageNumber)}
+        >
+          {pageNumber + 1}
+        </AWPageBtn>
+      </AWPagination>
     </ApprovalWidgetContainer>
   );
 };

@@ -7,7 +7,7 @@ import ApprovalHeader from "../../components/approval-header/approval-header.com
 import ApprovalReport from "../../components/approval-widget/approval-widget.component";
 import CheckInBrief from "../../components/check-in-brief/check-in-brief.component";
 import Dashboard from "../../components/dashboard/dashboard.component";
-import { ReportBody } from "./report-home.styles";
+import { ReportBody, RPTPageBtn, RPTPagination } from "./report-home.styles";
 
 import {
   RBody,
@@ -70,6 +70,7 @@ const ReportHome = () => {
     console.log(EmployeLog);
     setDisplayReports(EmployeLog);
     setDefReports(EmployeLog);
+    SetpageMax(Math.ceil(EmployeLog.length / DefaultMaxPerPage));
   }, [EmployeLog]);
   const Ant = async () => {
     const a = await FetchUserDataAsync({ key: "ACTION", value: 1 });
@@ -208,6 +209,29 @@ const ReportHome = () => {
         break;
     }
   };
+
+  const DefaultMaxPerPage = 10;
+  const [pageNumber, SetpageNumber] = useState(1);
+  const [pageMax, SetpageMax] = useState(1);
+  const handleSetpageNumber = (actionCase, num) => {
+    switch (actionCase) {
+      case "dec":
+        if (num - 1 !== 0) {
+          return SetpageNumber(num - 1);
+        }
+        break;
+      case "inc":
+        console.log(actionCase, num + 1, pageMax);
+
+        if (num + 1 > pageMax) return;
+        SetpageNumber(num + 1);
+
+        break;
+
+      default:
+        break;
+    }
+  };
   return (
     <>
       <ReportBody>
@@ -246,27 +270,48 @@ const ReportHome = () => {
                 </RRow>
               </RHead>
               <RBody>
-                {displayReports.map((dat) => {
-                  const rand = Math.random() * 10000000;
-                  const InDate = new Date(Number(dat.CHECKIN));
-                  const OutDate = new Date(Number(dat?.CHECKOUT));
-                  return (
-                    <RRow key={rand}>
-                      <RCell>{dat.TABLEID}</RCell>
-                      <RCell>{dat.ID}</RCell>
-                      <RCell>{dat.NAME}</RCell>
-                      <RCell>{dat.POSITION}</RCell>
-                      <RCell>{`${InDate.getFullYear()}-${InDate.getMonth()}-${InDate.getDate()} ${InDate.getHours()}:${InDate.getMinutes()}`}</RCell>
-                      <RCell>
-                        {dat.CHECKOUT === "0" || !dat.CHECKOUT
-                          ? "Still In"
-                          : `${OutDate.getFullYear()}-${OutDate.getMonth()}-${OutDate.getDate()} ${OutDate.getHours()}:${OutDate.getMinutes()}`}
-                      </RCell>
-                    </RRow>
-                  );
-                })}
+                {displayReports
+                  .filter((app, index) => {
+                    const k = DefaultMaxPerPage * pageNumber;
+
+                    return index >= k - DefaultMaxPerPage && index <= k;
+                  })
+                  .map((dat) => {
+                    const rand = Math.random() * 10000000;
+                    const InDate = new Date(Number(dat.CHECKIN));
+                    const OutDate = new Date(Number(dat?.CHECKOUT));
+                    return (
+                      <RRow key={rand}>
+                        <RCell>{dat.TABLEID}</RCell>
+                        <RCell>{dat.ID}</RCell>
+                        <RCell>{dat.NAME}</RCell>
+                        <RCell>{dat.POSITION}</RCell>
+                        <RCell>{`${InDate.getFullYear()}-${InDate.getMonth()}-${InDate.getDate()} ${InDate.getHours()}:${InDate.getMinutes()}`}</RCell>
+                        <RCell>
+                          {dat.CHECKOUT === "0" || !dat.CHECKOUT
+                            ? "Still In"
+                            : `${OutDate.getFullYear()}-${OutDate.getMonth()}-${OutDate.getDate()} ${OutDate.getHours()}:${OutDate.getMinutes()}`}
+                        </RCell>
+                      </RRow>
+                    );
+                  })}
               </RBody>
             </ReportTable>
+            <RPTPagination>
+              <RPTPageBtn
+                className={`${pageNumber - 1 === 0 ? "disabled" : ""}`}
+                onClick={() => handleSetpageNumber("dec", pageNumber)}
+              >
+                {pageNumber - 1 === 0 ? " " : pageNumber - 1}
+              </RPTPageBtn>
+              <RPTPageBtn>{pageNumber}</RPTPageBtn>
+              <RPTPageBtn
+                className={`${pageNumber + 1 > pageMax ? "disabled" : ""}`}
+                onClick={() => handleSetpageNumber("inc", pageNumber)}
+              >
+                {pageNumber + 1}
+              </RPTPageBtn>
+            </RPTPagination>
           </ReportTableContainer>
         </ReportContainer>
       </ReportBody>

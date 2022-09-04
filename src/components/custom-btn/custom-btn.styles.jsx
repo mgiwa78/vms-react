@@ -9,7 +9,6 @@ export const PrimaryBtn = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  width: 120px;
   font-size: 20px;
   cursor: pointer;
 
@@ -26,8 +25,7 @@ export const PrimaryBtn = styled.div`
     background-color: #ff596497;
   }
   &.checkInBtn {
-    width: 200px;
-    margin-top: 20px;
+    margin-top: 40px;
   }
 
   ${({ btnType }) =>

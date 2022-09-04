@@ -54,7 +54,7 @@ const CheckOutForm = () => {
   };
 
   const [formFields, SetFormFields] = useState(DefFormFields);
-  const [confirmState, setConfirmState] = useState("Confirm");
+  const [confirmState, setConfirmState] = useState("Confirm Check-out");
   const [VerifyState, setVerifyState] = useState("Verify");
   const [timeParse, setTimeParse] = useState("");
   const { CheckOutID, position, purpose, name, dept, time } = formFields;
@@ -92,24 +92,21 @@ const CheckOutForm = () => {
       time.length === 0
     )
       return alert("Invalid Entry");
-    if (confirmState !== "Confirm") return;
+    if (confirmState !== "Confirm Check-out") return;
     if (VerifyState !== "Verified") return;
     const newEmployeeLog = () => {
       const avaLog = EmployeLog.find(
-        (log) => log.ID === CheckOutID && log.CHECKIN
+        (log) => log.ID === CheckOutID && log.CHECKIN && log.CHECKOUT === "0"
       );
 
-      if (!avaLog) {
-        alert("invalid checkout process");
-        return;
-      }
       if ((avaLog && !avaLog.CHECKOUT) || (avaLog && avaLog.CHECKOUT === "0")) {
         const ww = EmployeLog.filter((data) => {
           return data.ID !== CheckOutID;
         });
         return [...ww, { ...avaLog, CHECKOUT: time }];
       } else {
-        alert("invalid checkout process");
+        console.log(avaLog);
+        alert("invalid aaacheckout process");
         return;
       }
     };
@@ -127,6 +124,8 @@ const CheckOutForm = () => {
     console.log(fullUserData);
 
     setConfirmState("Confirming");
+    console.log(time);
+
     if (dateEnt) {
       setTimeout(async () => {
         await InsertCeckOutDataInDb({
@@ -141,7 +140,7 @@ const CheckOutForm = () => {
         setTimeout(() => {
           SetFormFields({ ...DefFormFields });
           setTimeParse("");
-          setConfirmState("Confirm");
+          setConfirmState("Confirm Check-out");
           setVerifyState("Verify");
         }, 300);
       }, 800);
@@ -152,7 +151,7 @@ const CheckOutForm = () => {
         setTimeout(() => {
           SetFormFields({ ...DefFormFields });
           setTimeParse("");
-          setConfirmState("Confirm");
+          setConfirmState("Confirm Check-out");
           setVerifyState("Verify");
         }, 200);
       }, 500);
@@ -181,7 +180,7 @@ const CheckOutForm = () => {
       time: getTime,
     });
     const avaLog = EmployeLog.find(
-      (log) => log.ID === CheckOutID && log.CHECKIN
+      (log) => log.ID === CheckOutID && log.CHECKIN && log.CHECKOUT === "0"
     );
     SetfullUserData(avaLog);
   };
@@ -265,7 +264,7 @@ const CheckOutForm = () => {
             </ValidUserItem>
 
             <ValidUserItem>
-              <ListItem>Check-Out:</ListItem>
+              <ListItem>Check-Out Time:</ListItem>
 
               <TextInput
                 InputPosition="form_input"
@@ -291,10 +290,12 @@ const CheckOutForm = () => {
             </ValidUserItem>
 
             <CustomBtn
+              checkIn
               confirmState={confirmState}
-              state={`${confirmState === "Confirm" ? "active" : "off"}`}
+              state={`${
+                confirmState === "Confirm Check-out" ? "active" : "off"
+              }`}
               handleClick={(e) => handleConfirmPersonnel(e)}
-              CheckOut
             >
               {confirmState}
             </CustomBtn>

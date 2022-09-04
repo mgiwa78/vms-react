@@ -11,6 +11,8 @@ import {
   CheckInBriefTable,
   CheckInBriefTableContainer,
   CheckInBriefTitle,
+  CIBPageBtn,
+  CIBPagination,
 } from "./check-in-brief.styles";
 
 import { useSelector } from "react-redux";
@@ -19,11 +21,15 @@ import { Col } from "react-bootstrap";
 
 const CheckInBrief = ({ name }) => {
   const EmployeeCheckInLog = useSelector(SelectEmployeLog);
+  const DefaultMaxPerPage = 10;
+  const [pageNumber, SetpageNumber] = useState(1);
+  const [pageMax, SetpageMax] = useState(1);
 
   const [CheckInLog, SetCheckInLog] = useState([]);
   useEffect(() => {
     if (!EmployeeCheckInLog.length) return;
     SetCheckInLog(EmployeeCheckInLog);
+    SetpageMax(Math.ceil(EmployeeCheckInLog.length / DefaultMaxPerPage));
   }, [EmployeeCheckInLog]);
 
   const [filteredArray, SetFilteredArray] = useState({});
@@ -113,6 +119,25 @@ const CheckInBrief = ({ name }) => {
         break;
     }
   };
+  const handleSetpageNumber = (actionCase, num) => {
+    switch (actionCase) {
+      case "dec":
+        if (num - 1 !== 0) {
+          return SetpageNumber(num - 1);
+        }
+        break;
+      case "inc":
+        console.log(actionCase, num + 1, pageMax);
+
+        if (num + 1 > pageMax) return;
+        SetpageNumber(num + 1);
+
+        break;
+
+      default:
+        break;
+    }
+  };
   return (
     <CheckInBriefContainer lg={5}>
       <CheckInBriefHeader>
@@ -134,7 +159,11 @@ const CheckInBrief = ({ name }) => {
             </CBRow>
           </CBHead>
           <CBBody>
-            {CheckInLog.map((person) => {
+            {CheckInLog.filter((app, index) => {
+              const k = DefaultMaxPerPage * pageNumber;
+
+              return index >= k - DefaultMaxPerPage && index <= k;
+            }).map((person) => {
               const rand = Math.random() * 10000000;
               const pesDate = new Date(Number(person.CHECKIN));
 
@@ -150,6 +179,21 @@ const CheckInBrief = ({ name }) => {
           </CBBody>
         </CheckInBriefTable>
       </CheckInBriefTableContainer>
+      <CIBPagination>
+        <CIBPageBtn
+          className={`${pageNumber - 1 === 0 ? "disabled" : ""}`}
+          onClick={() => handleSetpageNumber("dec", pageNumber)}
+        >
+          {pageNumber - 1 === 0 ? " " : pageNumber - 1}
+        </CIBPageBtn>
+        <CIBPageBtn>{pageNumber}</CIBPageBtn>
+        <CIBPageBtn
+          className={`${pageNumber + 1 > pageMax ? "disabled" : ""}`}
+          onClick={() => handleSetpageNumber("inc", pageNumber)}
+        >
+          {pageNumber + 1}
+        </CIBPageBtn>
+      </CIBPagination>
     </CheckInBriefContainer>
   );
 };

@@ -1,18 +1,15 @@
 import styled from "styled-components/macro";
 
-export const CheckPointContainer = styled.div`
+export const CheckInFormContainer = styled.div`
   background-color: #f4f6f5;
-  height: 100vh;
   display: flex;
+  justify-content: space-around;
 `;
 
 export const CheckPointBody = styled.div`
   padding: 0 280px;
   display: flex;
   flex-direction: column;
-`;
-export const CheckInFormContainer = styled.div`
-  padding: 0px 50px;
 `;
 
 export const HeaderContainer = styled.div`

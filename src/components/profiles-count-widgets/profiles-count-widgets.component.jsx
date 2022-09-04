@@ -1,17 +1,17 @@
 import React from "react";
 import {
-  CheckedInWGTContainer,
-  CheckedInWGTCount,
-  CheckedInWGTTitle,
-} from "./checkedIn-count-widgets.styles";
+  ProfileWGTContainer,
+  ProfileWGTCount,
+  ProfileWGTTitle,
+} from "./profile-count-widgets.styles";
 
-const CheckedInWGT = () => {
+const ProfileWGT = ({ value }) => {
   return (
-    <CheckedInWGTContainer>
-      <CheckedInWGTCount>15</CheckedInWGTCount>
-      <CheckedInWGTTitle>Total Checked-in</CheckedInWGTTitle>
-    </CheckedInWGTContainer>
+    <ProfileWGTContainer>
+      <ProfileWGTCount>{value}</ProfileWGTCount>
+      <ProfileWGTTitle>Total Profiles</ProfileWGTTitle>
+    </ProfileWGTContainer>
   );
 };
 
-export default CheckedInWGT;
+export default ProfileWGT;

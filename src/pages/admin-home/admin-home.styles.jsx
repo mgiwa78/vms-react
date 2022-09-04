@@ -16,4 +16,5 @@ export const AdminBody = styled.div`
 `;
 export const AdminWidgets = styled.div`
   display: flex;
+  padding: 0;
 `;

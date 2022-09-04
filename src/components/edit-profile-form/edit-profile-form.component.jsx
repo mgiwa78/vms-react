@@ -142,6 +142,8 @@ const EditProfileForm = ({ lg }) => {
   };
   const handleClearFormFileds = (e) => {
     // FetchUniqueUserData(personnel_ID);
+    setVerificationBtnState("Verify and Retrieve");
+    setUpdateBtnState(" ");
     SetFormFields({
       ...DefFormFields,
     });
@@ -156,6 +158,64 @@ const EditProfileForm = ({ lg }) => {
   const [orginDate, setOrginDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
   const [stopDate, setStopDate] = useState(new Date());
+  const handleDateChange = (key, date) => {
+    const dateToSet = new Date(date);
+    console.log(date);
+    switch (key) {
+      case "start":
+        const startPointToSet =
+          `${
+            typeof date === "number"
+              ? (date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds())
+              : Date.UTC(
+                  date.getFullYear(),
+                  date.getMonth(),
+                  date.getDate(),
+                  date.getHours(),
+                  date.getMinutes(),
+                  date.getSeconds()
+                )
+          }` +
+          "-" +
+          duration.split("-")[1];
+        console.log(startPointToSet);
+        console.log(duration);
+        SetFormFields({ ...formFields, duration: startPointToSet });
+
+        break;
+      case "stop":
+        const stopPointToSet =
+          duration.split("-")[0] +
+          "-" +
+          `${
+            typeof date === "number"
+              ? (date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds())
+              : Date.UTC(
+                  date.getFullYear(),
+                  date.getMonth(),
+                  date.getDate(),
+                  date.getHours(),
+                  date.getMinutes(),
+                  date.getSeconds()
+                )
+          }`;
+        SetFormFields({ ...formFields, duration: stopPointToSet });
+        console.log(stopPointToSet);
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <EditProfileFormContainer>
       <FormTitle>Manage personel profile</FormTitle>
@@ -248,13 +308,16 @@ const EditProfileForm = ({ lg }) => {
               onChange={(date) => {
                 setStartDate(date);
                 setStopDate(date);
-                console.log(Date);
+                handleDateChange("start", date);
               }}
             />
             <DatePicker
               className="datePicker"
               selected={stopDate}
-              onChange={(date) => setStopDate(date)}
+              onChange={(date) => {
+                setStopDate(date);
+                handleDateChange("stop", date);
+              }}
             />
           </div>
         </Col>{" "}

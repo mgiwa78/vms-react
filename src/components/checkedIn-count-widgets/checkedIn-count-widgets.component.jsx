@@ -5,10 +5,10 @@ import {
   CheckedInWGTTitle,
 } from "./checkedIn-count-widgets.styles";
 
-const CheckedInWGT = () => {
+const CheckedInWGT = ({ value }) => {
   return (
     <CheckedInWGTContainer>
-      <CheckedInWGTCount>15</CheckedInWGTCount>
+      <CheckedInWGTCount>{value}</CheckedInWGTCount>
       <CheckedInWGTTitle>Total Checked-in</CheckedInWGTTitle>
     </CheckedInWGTContainer>
   );

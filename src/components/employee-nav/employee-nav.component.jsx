@@ -32,10 +32,10 @@ const EmployeeNav = () => {
             {/* <NavIcon src={DashIcon} /> */}
             Send Request
           </EmployeeNavItem>
-          <EmployeeNavItem onClick={() => Navigate("Requests")}>
+          {/* <EmployeeNavItem onClick={() => Navigate("Requests")}>
             <ManageSvg />
             View Requests
-          </EmployeeNavItem>
+          </EmployeeNavItem> */}
           <EmployeeNavItem>
             <SettingsSvg />
             Settings
