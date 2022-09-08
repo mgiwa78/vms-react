@@ -34,26 +34,7 @@ root.render(
       <ThemeProvider
         breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
       >
-        <Routes>
-          <Route path="/" element={<Auth />}>
-            <Route index element={<AdminSignIn />} />
-            <Route path="employeelogin" element={<EmployeeSignIn />} />
-            <Route path="checkpointlogin" element={<CheckInPointSignIn />} />
-          </Route>
-          <Route path="checkpointhome" element={<CheckPoint />}>
-            <Route index element={<CheckInForm />} />
-            <Route path="check-out" element={<CheckOutForm />} />
-          </Route>
-          <Route path="adminhome" element={<AdminHome />}>
-            <Route index element={<Dashboard />} />
-            <Route path="manage" element={<AdminManage />} />{" "}
-            <Route path="approval" element={<ApprovalHome />} />
-            <Route path="report" element={<ReportHome />} />
-          </Route>
-          <Route path="employee" element={<EmployeeHome />}>
-            <Route index element={<EmployeeRquestForm />} />
-          </Route>
-        </Routes>{" "}
+        <App />
       </ThemeProvider>{" "}
     </Provider>
   </BrowserRouter>

@@ -81,9 +81,25 @@ const CheckInForm = () => {
       return alert("Invalid Entry");
 
     const avaLog = EmployeLog.find(
-      (log) => log.ID === CheckInID && !log.CHECKOUT
+      (log) =>
+        (log.ID === CheckInID && !log.CHECKOUT) ||
+        (log.ID === CheckInID && log.CHECKOUT === "0")
     );
+    if (avaLog) {
+      setConfirmState("Rejected");
 
+      setTimeout(() => {
+        alert("Rejected");
+
+        setTimeout(() => {
+          SetFormFields({ ...DefFormFields });
+          setTimeParse("");
+          setConfirmState("Confirm Check-in");
+          setVerifyState("Verify");
+        }, 500);
+      }, 500);
+      return;
+    }
     if (avaLog && avaLog.CHECKIN && !avaLog.CHECKOUT) {
       alert("invalid checkout process");
       setTimeout(() => {

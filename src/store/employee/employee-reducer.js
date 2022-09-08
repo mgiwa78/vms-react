@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   EmployeeObj: [],
   EmployeeLog: [],
   ApprovalRequests: [],
+  user: null,
 };
 
 const EmployeeReducer = (state = INITIAL_STATE, action) => {
@@ -17,6 +18,8 @@ const EmployeeReducer = (state = INITIAL_STATE, action) => {
       return { ...state, ApprovalRequests: payload };
     case EMPLOYEE_ACTION_TYPES.SET_EMPLOYEE_LOG:
       return { ...state, EmployeeLog: payload };
+    case EMPLOYEE_ACTION_TYPES.SET_USER_AND_USER_TYPE:
+      return { ...state, user: payload };
     default:
       return state;
   }

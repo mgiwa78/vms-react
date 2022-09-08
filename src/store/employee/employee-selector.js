@@ -16,6 +16,9 @@ export const SelectEmployeLog = createSelector(
     return EmployeeState.EmployeeLog;
   }
 );
+export const SelectUser = createSelector([EmployeeState], (EmployeeState) => {
+  return EmployeeState.user;
+});
 export const SelectApprovalRequests = createSelector(
   [EmployeeState],
   (EmployeeState) => {

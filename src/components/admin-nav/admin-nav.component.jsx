@@ -36,7 +36,7 @@ const AdminNav = () => {
             <ManageSvg />
             Manage
           </AdminNavItem>
-          <AdminNavItem onClick={() => Navigate("report")}>
+          <AdminNavItem onClick={() => Navigate("report-log")}>
             <ReportSvg />
             Reports
           </AdminNavItem>

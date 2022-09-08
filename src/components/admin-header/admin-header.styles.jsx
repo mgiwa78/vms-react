@@ -19,3 +19,13 @@ export const HeaderTtitle = styled.div`
   font-weight: 600;
   font-size: 35px;
 `;
+export const HeaderBox = styled.div`
+  display: flex;
+  width: 12vw;
+  align-items: center;
+  justify-content: space-between;
+`;
+export const HeaderUserName = styled.div`
+  font-weight: 400;
+  font-size: 23px;
+`;

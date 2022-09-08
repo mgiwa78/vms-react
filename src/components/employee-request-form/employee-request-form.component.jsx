@@ -123,10 +123,10 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
       months[date.getMonth()]
     }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
   };
-  const [BtnState, setBtnState] = useState("Update");
+  const [BtnState, setBtnState] = useState("Request");
 
   const handleDatabaseUpdate = async (e) => {
-    if (BtnState !== "Update") return;
+    if (BtnState !== "Request") return;
     setBtnState("Updating");
 
     // FetchUniqueUserData(personnel_ID);
@@ -138,7 +138,7 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
       priority === "" ||
       dept === ""
     ) {
-      setBtnState("Update");
+      setBtnState("Request");
       return alert("invalid Fields Found");
     } else {
       const date = Date.now();
@@ -171,6 +171,7 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
         const data = await AddApprovalReqDataToDb(approvalrequest);
         if (data) {
           setTimeout(async () => {
+            alert("Request Sent");
             setBtnState("Updated");
 
             // await DeleteApprovalRequest(Number(approvalsFields.approvalID));
@@ -181,11 +182,11 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
             setTimeout(async () => {
               handleClearFormFileds();
 
-              setBtnState("Update");
+              setBtnState("Request");
             }, 500);
           }, 2000);
         } else {
-          setBtnState("Update");
+          setBtnState("Request");
         }
       } catch (error) {
         alert("An error occured");
@@ -298,7 +299,7 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
       <FormRow className="Bttom">
         <CustomBtn
           handleClick={(e) => handleDatabaseUpdate(e)}
-          state={`${BtnState === "Update" ? "active" : "off"}`}
+          state={`${BtnState === "Request" ? "active" : "off"}`}
           form_btn
           lg={6}
           size="lg"
