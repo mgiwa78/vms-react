@@ -12,7 +12,6 @@ export const EmployeeRquestFormContainer = styled(Col)`
   margin-bottom: 50px;
 
   .dateContainer {
-    display: flex;
     margin-top: 40px;
     width: max-content;
   }

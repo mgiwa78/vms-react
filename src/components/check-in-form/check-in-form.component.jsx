@@ -85,8 +85,6 @@ const CheckInForm = () => {
         (log.ID === CheckInID && !log.CHECKOUT) ||
         (log.ID === CheckInID && log.CHECKOUT === "0")
     );
-    console.log(EmployeLog, avaLog);
-
     if (avaLog) {
       setConfirmState("Rejected");
 

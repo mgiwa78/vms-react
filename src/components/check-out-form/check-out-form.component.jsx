@@ -79,8 +79,6 @@ const CheckOutForm = () => {
     if (VerifyState !== "Verified") return;
     const newEmployeeLog = () => {
       const avaLog = EmployeLog.find((log) => {
-        console.log(`${log.ID}` === CheckOutID ? log.ID : "");
-
         return log.ID === CheckOutID && log.CHECKOUT === "0";
       });
 
@@ -106,9 +104,6 @@ const CheckOutForm = () => {
     //   }
     // });
     const dateEnt = newEmployeeLog();
-    console.log(fullUserData);
-
-    console.log(time);
 
     if (dateEnt) {
       setConfirmState("Confirming");
