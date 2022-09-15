@@ -27,3 +27,9 @@ export const AddLogAction = (NewCheckinLog, EmployeeCheckinLog) => {
     payload: NewEmployeeCheckinLog,
   };
 };
+export const SetUserAction = (newUser) => {
+  return {
+    type: EMPLOYEE_ACTION_TYPES.SET_USER_AND_USER_TYPE,
+    payload: newUser,
+  };
+};

@@ -126,7 +126,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
       setBtnState("Update");
       return alert("invalid Fields Found");
     } else {
-      const date = new Date().getMilliseconds();
+      const date = Date.now();
       console.log(typeof startDate);
       if (typeof startDate === "number") {
         console.log("number");
@@ -158,6 +158,18 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
           stopDate.getMinutes(),
           stopDate.getSeconds()
         )}`;
+        console.log(date);
+        // console.log(
+        //   personnel_ID,
+        //   purpose,
+        //   date,
+        //   name,
+        //   dept,
+        //   duration,
+        //   position,
+        //   pesRes,
+        //   priority
+        // );
         const data = await CreateNewUserWithData({
           personnel_ID,
           purpose,
@@ -169,17 +181,6 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
           pesRes,
           priority,
         });
-        console.log(
-          personnel_ID,
-          purpose,
-          date,
-          name,
-          dept,
-          duration,
-          position,
-          pesRes,
-          priority
-        );
 
         if (data) {
           setTimeout(async () => {

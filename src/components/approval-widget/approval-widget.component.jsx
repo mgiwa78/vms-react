@@ -16,7 +16,7 @@ import {
 import data from "../../userData.json";
 import { TextDrpDwn } from "../form-elements/form-elements.component";
 
-const ApprovalWidget = ({ lg }) => {
+const ApprovalWidget = () => {
   const [filteredArray, SetFilteredArray] = useState({});
   const [displayApprovals, setDisplayApprovals] = useState([]);
   const DefaultMaxPerPage = 10;
