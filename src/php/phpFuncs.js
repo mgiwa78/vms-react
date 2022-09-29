@@ -183,7 +183,6 @@ export const SetCeckInDataInDb = async (Alldata) => {
     formdata.append("pesRes", userData.personRes);
     formdata.append("checkin", userData.checkIn);
     formdata.append("checkout", userData.checkOut);
-    console.log(formdata.has("pesRes"));
     try {
       const Data = await fetch("http://localhost/vms_back/index.php", {
         method: "POST",
@@ -347,7 +346,6 @@ export const AddApprovalReqDataToDb = async (employeeRequestData) => {
   }
 };
 export const SetlectUserInDb = async (userLoginData) => {
-  console.log(userLoginData);
   let formdata = new FormData();
   const action = { key: "ACTION", value: 30 };
   formdata.append(action.key, action.value);
@@ -355,6 +353,7 @@ export const SetlectUserInDb = async (userLoginData) => {
   formdata.append("userName", userLoginData.userName);
   formdata.append("userPassword", userLoginData.userPassword);
   formdata.append("userType", userLoginData.userType);
+  console.log(userLoginData.userType);
 
   try {
     const Data = await fetch("http://localhost/vms_back/index.php", {
@@ -367,7 +366,6 @@ export const SetlectUserInDb = async (userLoginData) => {
     })
       .then((response) => response.json())
       .then((data) => data);
-
     return Data;
   } catch (error) {
     alert(error);

@@ -251,7 +251,7 @@ const ReportHome = () => {
                     const OutDate = new Date(Number(dat?.CHECKOUT));
                     return (
                       <RRow key={rand}>
-                        <RCell>{dat.TABLEID}</RCell>
+                        <RCell>{dat.REC_ID}</RCell>
                         <RCell>{dat.ID}</RCell>
                         <RCell>{dat.NAME}</RCell>
                         <RCell>{dat.POSITION}</RCell>

@@ -58,6 +58,9 @@ export const EmployeeNavItem = styled.li`
   border-radius: 8px;
   cursor: pointer;
   fill: #b5bcc2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 
   &:hover {
     fill: #4cbfb0;

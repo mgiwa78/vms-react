@@ -41,20 +41,32 @@ const Auth = () => {
   const EmployeeData = useSelector(SelectEmployeData);
   const EmployeeCheckInLog = useSelector(SelectEmployeLog);
   const location = useLocation();
-
-  const Ant = async () => {
-    const a = await FetchUserDataAsync({ key: "ACTION", value: 1 });
-    const b = await FetchCheckInDataInDb({ key: "ACTION", value: 12 });
-    dispatch(SetCheckInLogAction(b));
-
-    dispatch(SetEmployeeAction(a));
-  };
   const curUser = useSelector(SelectUser);
+
+  useEffect(() => {
+    if (location.pathname === "/") return;
+    if (
+      location.pathname === "/employeelogin" ||
+      location.pathname === "/checkpointlogin"
+    )
+      return;
+    if (!curUser) Navigate("/");
+
+    console.log(location);
+  }, [location]);
+
+  // const Ant = async () => {
+  //   const a = await FetchUserDataAsync({ key: "ACTION", value: 1 });
+  //   const b = await FetchCheckInDataInDb({ key: "ACTION", value: 12 });
+  //   dispatch(SetCheckInLogAction(b));
+
+  //   dispatch(SetEmployeeAction(a));
+  // };
 
   useEffect(() => {
     // SetApprovalReqDataInDb(InitApprovalData);
     if (EmployeeData.length !== 0) return;
-    Ant();
+    // Ant();
     dispatch(SetUserAction(null));
   }, []);
 

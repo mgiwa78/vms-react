@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import CustomBtn from "../../components/custom-btn/custom-btn.component";
 import { TextInput } from "../../components/form-elements/form-elements.component";
 import { SetlectUserInDb } from "../../php/phpFuncs";
@@ -13,17 +13,33 @@ import {
   AdminRightTitle,
   AdminSubText,
 } from "./admin-sign-in.styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SetUserAction } from "../../store/employee/employee-actions";
+import { SelectUser } from "../../store/employee/employee-selector";
 
 const AdminSignIn = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState(null);
+  const location = useLocation();
+  const curUser = useSelector(SelectUser);
+
+  useEffect(() => {
+    console.log(location);
+
+    if (location.pathname === "/") return;
+    if (
+      location.pathname === "/employeelogin" ||
+      location.pathname === "/checkpointlogin"
+    )
+      return;
+    if (!curUser) Navigate("/");
+
+    console.log(location);
+  }, [location]);
 
   const confirmUserLogin = async (userData) => {
     const [data] = await SetlectUserInDb(userData);
     if (data) {
-      console.log(data);
       const userData = {
         curUserName: data.USERNAME,
         curPassword: data.PASSWORD,
