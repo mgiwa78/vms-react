@@ -48,7 +48,7 @@ root.render(
             <Route index element={<Dashboard />} />
             <Route path="manage" element={<AdminManage />} />{" "}
             <Route path="approval" element={<ApprovalHome />} />
-            <Route path="report" element={<ReportHome />} />
+            <Route path="report-log" element={<ReportHome />} />
           </Route>
           <Route path="employee" element={<EmployeeHome />}>
             <Route index element={<EmployeeRquestForm />} />

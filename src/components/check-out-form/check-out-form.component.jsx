@@ -78,19 +78,21 @@ const CheckOutForm = () => {
     if (confirmState !== "Confirm Check-out") return;
     if (VerifyState !== "Verified") return;
     const newEmployeeLog = () => {
-      const avaLog = EmployeLog.find(
-        (log) => log.ID === CheckOutID && log.CHECKIN && log.CHECKOUT === "0"
-      );
+      const avaLog = EmployeLog.find((log) => {
+        console.log(`${log.ID}` === CheckOutID ? log.ID : "");
+
+        return log.ID === CheckOutID && log.CHECKOUT === "0";
+      });
+
+      if (!avaLog) {
+        alert("Invalid Checkout process");
+      }
 
       if ((avaLog && !avaLog.CHECKOUT) || (avaLog && avaLog.CHECKOUT === "0")) {
         const ww = EmployeLog.filter((data) => {
           return data.ID !== CheckOutID;
         });
         return [...ww, { ...avaLog, CHECKOUT: time }];
-      } else {
-        console.log(avaLog);
-        alert("invalid aaacheckout process");
-        return;
       }
     };
     // EmployeLog.forEach((log) => {
@@ -106,10 +108,11 @@ const CheckOutForm = () => {
     const dateEnt = newEmployeeLog();
     console.log(fullUserData);
 
-    setConfirmState("Confirming");
     console.log(time);
 
     if (dateEnt) {
+      setConfirmState("Confirming");
+
       setTimeout(async () => {
         await InsertCeckOutDataInDb({
           id: Number(fullUserData.ID),
@@ -285,14 +288,7 @@ const CheckOutForm = () => {
           </ValidUserList>
         </ValidUserLeft>
 
-        <ValidUserRight>
-          {/* <ValidUserProfile
-              style={{
-                backgroundImage:
-                  "url('https://cdn.pixabay.com/photo/2016/11/21/6/42/beard-1845166_960_720.jpg')",
-              }}
-            ></ValidUserProfile> */}
-        </ValidUserRight>
+        <ValidUserRight></ValidUserRight>
       </ValidUserCheckinContainer>
     </CheckOutFormContainer>
   );

@@ -346,3 +346,30 @@ export const AddApprovalReqDataToDb = async (employeeRequestData) => {
     alert(error);
   }
 };
+export const SetlectUserInDb = async (userLoginData) => {
+  console.log(userLoginData);
+  let formdata = new FormData();
+  const action = { key: "ACTION", value: 30 };
+  formdata.append(action.key, action.value);
+
+  formdata.append("userName", userLoginData.userName);
+  formdata.append("userPassword", userLoginData.userPassword);
+  formdata.append("userType", userLoginData.userType);
+
+  try {
+    const Data = await fetch("http://localhost/vms_back/index.php", {
+      method: "POST",
+      headers: {
+        // Accept: "application/json",
+        // "Content-Type": "application/json",
+      },
+      body: formdata,
+    })
+      .then((response) => response.json())
+      .then((data) => data);
+
+    return Data;
+  } catch (error) {
+    alert(error);
+  }
+};
