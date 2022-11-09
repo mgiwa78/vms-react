@@ -2,28 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { Routes, Route } from "react-router-dom";
+
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Auth from "./routes/auth/auth.component";
-import AdminSignIn from "./pages/admin-sign-in/admin-sign-in.component";
-import EmployeeSignIn from "./pages/employee-sign-in/employee-sign-in.component";
-import CheckInPointSignIn from "./pages/security-point-sign-in/security-point-sign-in.component";
-import CheckPoint from "./pages/check-point-home/check-point-home.component";
-import AdminHome from "./pages/admin-home/admin-home.component";
-import Dashboard from "./components/dashboard/dashboard.component";
-import AdminManage from "./pages/admin-manage/admin-mange.components";
+
 import ThemeProvider from "react-bootstrap/ThemeProvider";
-import ApprovalHome from "./pages/approval-home/approval-home.component";
 
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-import ReportHome from "./pages/report-home/report-home.component";
-import EmployeeHome from "./pages/employee-home/employee-home.component";
-import EmployeeRquestForm from "./components/employee-request-form/employee-request-form.component";
-import CheckInForm from "./components/check-in-form/check-in-form.component";
-import CheckOutForm from "./components/check-out-form/check-out-form.component";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

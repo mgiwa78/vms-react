@@ -84,6 +84,7 @@ export const CreateNewUserWithData = async (userData) => {
   formdata.append("duration", userData.duration);
   formdata.append("pesRes", userData.pesRes);
   formdata.append("priority", userData.priority);
+  formdata.append("appId", userData.appId);
   try {
     const Data = await fetch("http://localhost/vms_back/index.php", {
       method: "POST",
@@ -233,12 +234,12 @@ export const InsertCeckInDataInDb = async (EmployeeLog) => {
 export const InsertCeckOutDataInDb = async (userData) => {
   let formdata = new FormData();
   const action = { key: "ACTION", value: 13 };
-  console.log(userData);
   formdata.append(action.key, action.value);
   formdata.append("id", userData.id);
   formdata.append("tableId", userData.tableId);
 
   formdata.append("checkout", userData.checkOut);
+  console.log(userData);
   try {
     const Data = await fetch("http://localhost/vms_back/index.php", {
       method: "POST",
@@ -250,7 +251,6 @@ export const InsertCeckOutDataInDb = async (userData) => {
     })
       .then((response) => response.json())
       .then((data) => data);
-
     return Data;
   } catch (error) {
     alert(error);
@@ -314,10 +314,33 @@ export const DeleteApprovalRequest = async (approvalID) => {
     alert(error);
   }
 };
+export const FetchRequestsByIdAsync = async (PesID) => {
+  let formdata = new FormData();
+  console.log(PesID);
+  const action = { key: "ACTION", value: 24 };
+
+  formdata.append(action.key, action.value);
+  formdata.append("PesID", PesID);
+  try {
+    formdata.append("FETCH_USER", true);
+    const Data = await fetch("http://localhost/vms_back/index.php", {
+      method: "POST",
+      headers: {
+        // Accept: "application/json",
+        // "Content-Type": "application/json",
+      },
+      body: formdata,
+    })
+      .then((response) => response.json())
+      .then((data) => data);
+    return Data;
+  } catch (error) {
+    alert(error);
+  }
+};
 export const AddApprovalReqDataToDb = async (employeeRequestData) => {
   let formdata = new FormData();
   const action = { key: "ACTION", value: 23 };
-  console.log(employeeRequestData.dateRequested);
   formdata.append(action.key, action.value);
   formdata.append("purpose", employeeRequestData.purpose);
   formdata.append("name", employeeRequestData.name);
@@ -327,6 +350,7 @@ export const AddApprovalReqDataToDb = async (employeeRequestData) => {
   formdata.append("position", employeeRequestData.position);
   formdata.append("priority", employeeRequestData.priority);
   formdata.append("timeLength", employeeRequestData.timeLength);
+  formdata.append("reqById", Number(employeeRequestData.req_by_id));
 
   try {
     const Data = await fetch("http://localhost/vms_back/index.php", {

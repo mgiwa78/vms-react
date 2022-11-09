@@ -90,7 +90,7 @@ export const AWCell = styled.td`
   }
 `;
 export const AWPagination = styled.div`
-  width: 100%;
+  width: 40%;
   justify-content: space-between;
   display: flex;
   height: 50px;
@@ -101,7 +101,7 @@ export const AWPagination = styled.div`
   border-bottom-right-radius: 8px;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 30%;
 `;
 export const AWPageBtn = styled.div`
   width: max-content;

@@ -244,14 +244,15 @@ const EditProfileForm = ({ lg }) => {
           lg={4}
           label="Name"
         />
-        <TextInput
+        <TextDrpDwn
           handleChange={(e) => handleInputChange(e)}
-          value={priority}
           bg={color}
-          lg={4}
+          lg={3}
           name="priority"
-          InputPosition="form_input"
+          options={["High", "Medium", "Low"]}
           label="Priority"
+          value={priority}
+          InputPosition="form_input"
         />
         <TextDrpDwn
           handleChange={(e) => handleInputChange(e)}
@@ -272,14 +273,14 @@ const EditProfileForm = ({ lg }) => {
           lg={4}
           label="Purpose"
         />
-        <TextInput
+        <TextDrpDwn
           handleChange={(e) => handleInputChange(e)}
-          value={dept}
-          name="dept"
           bg={color}
           lg={4}
-          InputPosition="form_input"
+          name="dept"
+          options={["dept1", "dept2", "dept3", "dept4", " "]}
           label="Department"
+          value={dept}
         />
         <TextInput
           handleChange={(e) => handleInputChange(e)}

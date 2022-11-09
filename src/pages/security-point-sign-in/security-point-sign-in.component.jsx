@@ -24,6 +24,7 @@ const CheckInPointSignIn = () => {
 
   const confirmUserLogin = async (userData) => {
     const [data] = await SetlectUserInDb(userData);
+
     if (data) {
       console.log(data);
       const userData = {
@@ -84,7 +85,7 @@ const CheckInPointSignIn = () => {
                 const loginData = {
                   userType: "check_point_users",
                   userName: securityPointID,
-                  userPassword: "DEAFAULT",
+                  userPassword: "DEFAULT",
                 };
                 handleLoginSubmit(loginData);
               }}

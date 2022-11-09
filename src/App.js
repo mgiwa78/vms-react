@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { SelectUser } from "./store/employee/employee-selector";
 import { useEffect } from "react";
+import ViewEmployeeReqs from "./pages/view employee requests/viewemployeerequests.components.jsx";
 
 function App() {
   const location = useLocation();
@@ -60,6 +61,7 @@ function App() {
         </Route>
         <Route path="employee" element={<EmployeeHome />}>
           <Route index element={<EmployeeRquestForm />} />
+          <Route path="viewrequests" element={<ViewEmployeeReqs />} />
         </Route>
       </Routes>{" "}
     </div>

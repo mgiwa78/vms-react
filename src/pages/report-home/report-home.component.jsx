@@ -113,6 +113,22 @@ const ReportHome = () => {
           if (aFirstLetter < bFirstLetter) return -1;
           return 0;
         });
+        SetpageNumber(1);
+
+        return SetFilteredArray({ sortedArray, sortValue });
+      }
+      case "id": {
+        const sortedArray = arrayToSort;
+
+        sortedArray.sort(function (a, b) {
+          const aF = Number(a.REC_ID);
+          const bF = Number(b.REC_ID);
+
+          if (aF < bF) return -1;
+          if (aF > bF) return 0;
+          return 0;
+        });
+        SetpageNumber(1);
 
         return SetFilteredArray({ sortedArray, sortValue });
       }
@@ -120,13 +136,15 @@ const ReportHome = () => {
         const sortedArray = arrayToSort;
 
         sortedArray.sort(function (a, b) {
-          const aFirstLetter = a.POSITION[0];
-          const bFirstLetter = b.POSITION[0];
+          const aF = a.POSITION[0];
+          const bF = b.POSITION[0];
 
-          if (aFirstLetter > bFirstLetter) return 1;
-          if (aFirstLetter < bFirstLetter) return -1;
+          if (aF > bF) return 1;
+          if (aF < bF) return -1;
           return 0;
         });
+
+        SetpageNumber(1);
 
         return SetFilteredArray({ sortedArray, sortValue });
       }
@@ -137,10 +155,11 @@ const ReportHome = () => {
           const aCheckIn = Number(a.CHECKIN);
           const bCheckIn = Number(b.CHECKIN);
 
-          if (aCheckIn > bCheckIn) return 1;
-          if (aCheckIn < bCheckIn) return -1;
+          if (aCheckIn > bCheckIn) return -1;
+          if (aCheckIn < bCheckIn) return 0;
           return 0;
         });
+        SetpageNumber(1);
 
         return SetFilteredArray({ sortedArray, sortValue });
       }
@@ -152,10 +171,11 @@ const ReportHome = () => {
           const aCheckOut = Number(a.CHECKOUT);
           const bCheckOut = Number(b.CHECKOUT);
 
-          if (aCheckOut > bCheckOut) return 1;
-          if (aCheckOut < bCheckOut) return -1;
+          if (aCheckOut > bCheckOut) return -1;
+          if (aCheckOut < bCheckOut) return 0;
           return 0;
         });
+        SetpageNumber(1);
 
         return SetFilteredArray({ sortedArray, sortValue });
       }

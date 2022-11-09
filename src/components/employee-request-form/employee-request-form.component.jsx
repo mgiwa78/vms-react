@@ -15,7 +15,10 @@ import {
 } from "../form-elements/form-elements.component";
 import { useSelector } from "react-redux";
 import CustomBtn from "../custom-btn/custom-btn.component";
-import { SelectEmployeData } from "../../store/employee/employee-selector";
+import {
+  SelectEmployeData,
+  SelectUser,
+} from "../../store/employee/employee-selector";
 import {
   AddApprovalReqDataToDb,
   CreateNewUserWithData,
@@ -39,6 +42,7 @@ import { Col, Row } from "react-bootstrap";
 
 const EmployeeRquestForm = ({ lg, approvalsFields }) => {
   const dispatch = useDispatch();
+  const UserState = useSelector(SelectUser);
 
   const EmployeeData = useSelector(SelectEmployeData);
   const Ant = async () => {
@@ -126,6 +130,7 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
   const [BtnState, setBtnState] = useState("Request");
 
   const handleDatabaseUpdate = async (e) => {
+    console.log(UserState);
     if (BtnState !== "Request") return;
     setBtnState("Updating");
 
@@ -165,6 +170,7 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
         name: personnel_name,
         priority,
         dueDate: Number(dueDate),
+        req_by_id: UserState.curProfileID,
       };
       console.log(approvalrequest);
       try {
@@ -219,13 +225,15 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
           lg={6}
           InputPosition="form_input"
         />
-        <TextInput
+
+        <TextDrpDwn
           handleChange={(e) => handleInputChange(e)}
           bg={color}
-          value={priority}
+          lg={3}
           name="priority"
+          options={["High", "Medium", "Low"]}
           label="Priority"
-          lg={6}
+          value={priority}
           InputPosition="form_input"
         />
       </FormRow>

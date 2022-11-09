@@ -111,7 +111,7 @@ const CheckOutForm = () => {
       setTimeout(async () => {
         await InsertCeckOutDataInDb({
           id: Number(fullUserData.ID),
-          tableId: Number(fullUserData.TABLEID),
+          tableId: Number(fullUserData.REC_ID),
 
           checkOut: time,
         });

@@ -65,7 +65,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
 
   useEffect(() => {
     console.log(approvalsFields);
-
+    if (!approvalsFields) return;
     if (
       approvalsFields.purpose === "" ||
       approvalsFields.name === "" ||
@@ -170,6 +170,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
         //   pesRes,
         //   priority
         // );
+        console.log(approvalsFields);
         const data = await CreateNewUserWithData({
           personnel_ID,
           purpose,
@@ -180,6 +181,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
           duration,
           pesRes,
           priority,
+          appId: Number(approvalsFields.approvalID),
         });
 
         if (data) {
@@ -188,7 +190,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
 
             console.log(approvalsFields.approvalID);
             console.log(Number(approvalsFields.approvalID));
-            await DeleteApprovalRequest(Number(approvalsFields.approvalID));
+            // await DeleteApprovalRequest(Number(approvalsFields.approvalID));
 
             const c = await FetchApprovalsDataInDb();
             dispatch(SetApprovalRequestAction(c));

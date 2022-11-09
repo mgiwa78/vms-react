@@ -68,7 +68,7 @@ export const CBCell = styled.td`
   }
 `;
 export const CIBPagination = styled.div`
-  width: 100%;
+  width: 40%;
   justify-content: space-between;
   display: flex;
   height: 50px;
@@ -80,7 +80,7 @@ export const CIBPagination = styled.div`
   border-bottom-right-radius: 8px;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 28%;
 `;
 export const CIBPageBtn = styled.div`
   width: max-content;

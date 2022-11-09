@@ -1,63 +1,68 @@
 import React, { useEffect, useState } from "react";
 
-import { ApprovalBody, ApprovalBtn } from "./approval-home.styles";
+import { RequetsBody, RequetsBtn } from "./viewemployeerequests.styles";
 
 import {
-  AWBody,
-  AWCell,
-  AWH,
-  AWHead,
-  AWRow,
-  ApprovalReportContainer,
-  ApprovalReportTitle,
-  ApprovalReportTable,
-  ApprovalReportTableContainer,
-  ApprovalReportHeader,
-} from "./approval-home.styles";
+  VRBody,
+  VRCell,
+  VRH,
+  VRHead,
+  VRRow,
+  RequetsReportContainer,
+  RequetsReportTitle,
+  RequetsReportTable,
+  RequetsReportTableContainer,
+  RequetsReportHeader,
+} from "./viewemployeerequests.styles";
 import {
   TextDrpDwn,
   TextInput,
 } from "../../components/form-elements/form-elements.component";
-import { FetchApprovalsDataInDb } from "../../php/phpFuncs";
-import { SetApprovalRequestAction } from "../../store/employee/employee-actions";
+import {
+  FetchRequestsByIdAsync,
+  FetchRequestsDataInDb,
+} from "../../php/phpFuncs";
+import { SetRequestRequestAction } from "../../store/employee/employee-actions";
 import { useDispatch } from "react-redux";
-import { SelectApprovalRequests } from "../../store/employee/employee-selector";
 import { useSelector } from "react-redux";
 import ApproveProfileForm from "../../components/approve-profile-form/approve-profile-form.component";
+import { SelectUser } from "../../store/employee/employee-selector";
 
-const ApprovalHome = () => {
+const ViewEmployeeReqs = () => {
   const dispatch = useDispatch();
 
   const [filteredArray, SetFilteredArray] = useState({});
-  const [displayApprovals, setDisplayApprovals] = useState([]);
-  const [DefApprovals, setDefApprovals] = useState([]);
+  const curUser = useSelector(SelectUser);
+  const [displayRequests, setDisplayRequests] = useState([]);
+  const [DefRequests, setDefRequests] = useState([]);
 
-  const ApprovalRequests = useSelector(SelectApprovalRequests);
+  const [allRequests, setAllRequests] = useState([]);
 
-  const FetchApprovalRequestsAsync = async () => {
-    const a = await FetchApprovalsDataInDb();
-
-    dispatch(SetApprovalRequestAction(a));
-  };
   useEffect(() => {
-    if (ApprovalRequests.length === 0) {
-      FetchApprovalRequestsAsync();
+    console.log(curUser.curProfileID);
+    if (allRequests.length === 0) {
+      const FetchRequestsById = async (id) => {
+        const a = await FetchRequestsByIdAsync(id);
+        console.log(a);
+        setAllRequests(a);
+      };
+      FetchRequestsById(curUser.curProfileID);
     }
-  }, []);
+  }, [curUser]);
 
   useEffect(() => {
     console.log(filteredArray);
     if (Object.keys(filteredArray).length === 0) return;
     if (filteredArray.sortedArray?.length === 0) return;
 
-    setDisplayApprovals(filteredArray.sortedArray);
+    setDisplayRequests(filteredArray.sortedArray);
   }, [filteredArray]);
 
   useEffect(() => {
-    if (ApprovalRequests.length === 0) return;
-    setDisplayApprovals(ApprovalRequests);
-    setDefApprovals(ApprovalRequests);
-  }, [ApprovalRequests]);
+    if (allRequests.length === 0) return;
+    setDisplayRequests(allRequests);
+    setDefRequests(allRequests);
+  }, [allRequests]);
 
   const DefSearchFormFields = {
     SearchValue: "",
@@ -73,20 +78,20 @@ const ApprovalHome = () => {
 
   useEffect(() => {
     if (SearchValue === "" || !SearchValue) {
-      SetFilteredArray({ sortedArray: DefApprovals, SearchValue });
+      SetFilteredArray({ sortedArray: DefRequests, SearchValue });
     } else {
-      handleSearchAction(DefApprovals, SearchValue);
+      handleSearchAction(DefRequests, SearchValue);
     }
   }, [SearchValue]);
 
-  const handleSearchAction = (DefApprovals, SearchValue) => {
+  const handleSearchAction = (DefRequests, SearchValue) => {
     if (SearchValue === "") {
     } else {
       const patchedSearchValu =
         SearchValue[0].toUpperCase() +
         SearchValue.slice(1, SearchValue.length + 1);
-      if (!DefApprovals) return;
-      const sortedArray = DefApprovals.filter((PersonLog) => {
+      if (!DefRequests) return;
+      const sortedArray = DefRequests.filter((PersonLog) => {
         return (
           PersonLog.REQUESTED_BY.includes(patchedSearchValu) ||
           PersonLog.REQUESTED_BY.includes(SearchValue) ||
@@ -100,7 +105,7 @@ const ApprovalHome = () => {
             PRIORITY: "",
             REQUESTED_BY: "",
             PURPOSE: "",
-            APPROVAL_ID: "",
+            Request_ID: "",
           },
         ],
       };
@@ -181,7 +186,7 @@ const ApprovalHome = () => {
         break;
     }
   };
-  const [approvalsFields, setApprovalsFields] = useState({
+  const [RequestsFields, setRequestsFields] = useState({
     personnel_ID: "",
     position: " ",
     name: "",
@@ -193,31 +198,30 @@ const ApprovalHome = () => {
     dept: "",
   });
 
-  const handleApproveBtn = (e, approvalItem) => {
+  const handleApproveBtn = (e, RequestItem) => {
     if (
       !(
-        approvalItem.POSITIION ||
-        approvalItem.NAME ||
-        approvalItem.PRIORITY ||
-        approvalItem.PURPOSE ||
-        approvalItem.REQUESTED_BY ||
-        approvalItem.PURPOSE ||
-        approvalItem.APPROVAL_ID
+        RequestItem.POSITIION ||
+        RequestItem.NAME ||
+        RequestItem.PRIORITY ||
+        RequestItem.PURPOSE ||
+        RequestItem.REQUESTED_BY ||
+        RequestItem.PURPOSE ||
+        RequestItem.Request_ID
       )
     )
       return;
     e.preventDefault();
-    const enddate = calcEndTime(approvalItem.TIME_LENGHT);
-    setApprovalsFields({
-      position: approvalItem.POSITIION,
-      name: approvalItem.NAME,
-      priority: approvalItem.PRIORITY,
-      purpose: approvalItem.PURPOSE,
-      pesRes: approvalItem.REQUESTED_BY,
-      dept: approvalItem.PURPOSE,
+    const enddate = calcEndTime(RequestItem.TIME_LENGHT);
+    setRequestsFields({
+      position: RequestItem.POSITIION,
+      name: RequestItem.NAME,
+      priority: RequestItem.PRIORITY,
+      purpose: RequestItem.PURPOSE,
+      pesRes: RequestItem.REQUESTED_BY,
+      dept: RequestItem.PURPOSE,
       endDate: enddate,
-      approvalID: approvalItem.APPROVAL_ID,
-      status: approvalItem.STATUS,
+      RequestID: RequestItem.Request_ID,
     });
   };
   const months = {
@@ -253,11 +257,10 @@ const ApprovalHome = () => {
     return curDate + timeLenght();
   };
   return (
-    <ApprovalBody>
-      <ApproveProfileForm approvalsFields={approvalsFields} />
-      <ApprovalReportContainer fluid="true">
-        <ApprovalReportHeader fluid="true">
-          <ApprovalReportTitle>Approval requests </ApprovalReportTitle>
+    <RequetsBody>
+      <RequetsReportContainer fluid="true">
+        <RequetsReportHeader fluid="true">
+          <RequetsReportTitle>Request requests </RequetsReportTitle>
 
           <div className="header_class">
             <TextInput
@@ -265,83 +268,66 @@ const ApprovalHome = () => {
               handleChange={(e) => handleInputChange(e)}
               bg={"#000"}
               value={SearchValue}
-              approvalSearch
+              RequestSearch
               name="SearchValue"
               placeholder="Search by ID and Name"
-              lg={12}
+              lg={6}
             />
             <TextDrpDwn
               sortOption={true}
               options={["priority", "due date", "name", "purpose"]}
-              handleChange={(e) => handleSortAction(e, displayApprovals)}
+              handleChange={(e) => handleSortAction(e, displayRequests)}
             />
           </div>
-        </ApprovalReportHeader>
+        </RequetsReportHeader>
 
-        <ApprovalReportTableContainer>
-          <ApprovalReportTable striped>
-            <AWHead className="headText">
-              <AWRow>
-                <AWH>app_id</AWH>
-                <AWH>PRIORITY</AWH>
-                <AWH>Due date</AWH>
+        <RequetsReportTableContainer>
+          <RequetsReportTable striped>
+            <VRHead className="headText">
+              <VRRow>
+                <VRH>Request ID</VRH>
+                <VRH>PRIORITY</VRH>
+                <VRH>NAME</VRH>
+                <VRH>Due date</VRH>
 
-                <AWH>Requested By</AWH>
-                <AWH>Purpose</AWH>
-                <AWH>Approve</AWH>
-              </AWRow>
-            </AWHead>
-            <AWBody>
-              {console.log(displayApprovals)}
-              {displayApprovals
-                ? displayApprovals.map((approvalItem) => {
+                <VRH>Status</VRH>
+              </VRRow>
+            </VRHead>
+            <VRBody>
+              {console.log(displayRequests)}
+              {displayRequests
+                ? displayRequests.map((RequestItem) => {
                     const rand = Math.random() * 10000000;
-                    const regDate = new Date(
-                      Number(`${approvalItem.DUE_DATE}`)
-                    );
+                    const regDate = new Date(Number(`${RequestItem.DUE_DATE}`));
 
                     return (
-                      <AWRow key={rand}>
-                        <AWCell>{approvalItem.APPROVAL_ID}</AWCell>
-                        <AWCell priority={`${approvalItem.PRIORITY}`}>
+                      <VRRow key={rand}>
+                        <VRCell>{RequestItem.APPROVAL_ID}</VRCell>
+                        <VRCell priority={`${RequestItem.PRIORITY}`}>
                           <span className="priority">
-                            {approvalItem.PRIORITY}
+                            {RequestItem.PRIORITY}
                           </span>
-                        </AWCell>
+                        </VRCell>
+                        <VRCell>{RequestItem.NAME}</VRCell>
 
-                        <AWCell>
-                          {approvalItem.DUE_DATE
+                        <VRCell>
+                          {RequestItem.DUE_DATE
                             ? `${regDate?.getFullYear()}-${
                                 months[regDate.getMonth() + 1]
                               }-${regDate.getDate()}`
                             : ""}
-                        </AWCell>
-                        <AWCell>{approvalItem.REQUESTED_BY}</AWCell>
-                        <AWCell>{approvalItem.PURPOSE}</AWCell>
-                        <AWCell>
-                          {" "}
-                          <ApprovalBtn
-                            onClick={(e) => handleApproveBtn(e, approvalItem)}
-                          >
-                            {approvalItem.REQUESTED_BY ||
-                            approvalItem.REQUESTED_BY ||
-                            approvalItem.DUE_DATE ||
-                            approvalItem.PRIORITY ||
-                            approvalItem.APPROVAL_ID
-                              ? "Approve"
-                              : "Invalid"}
-                          </ApprovalBtn>
-                        </AWCell>
-                      </AWRow>
+                        </VRCell>
+                        <VRCell>{RequestItem.STATUS}</VRCell>
+                      </VRRow>
                     );
                   })
                 : ""}
-            </AWBody>
-          </ApprovalReportTable>
-        </ApprovalReportTableContainer>
-      </ApprovalReportContainer>
-    </ApprovalBody>
+            </VRBody>
+          </RequetsReportTable>
+        </RequetsReportTableContainer>
+      </RequetsReportContainer>
+    </RequetsBody>
   );
 };
 
-export default ApprovalHome;
+export default ViewEmployeeReqs;

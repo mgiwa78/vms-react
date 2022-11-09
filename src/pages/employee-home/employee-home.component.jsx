@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import EmployeeNav from "../../components/employee-nav/employee-nav.component";
 import EmployeeHeader from "../../components/admin-header/admin-header.component";
 import CheckInBrief from "../../components/check-in-brief/check-in-brief.component";
@@ -21,13 +21,23 @@ import {
 import {
   SelectEmployeLog,
   SelectEmployeData,
+  SelectUser,
 } from "../../store/employee/employee-selector";
 import { useDispatch } from "react-redux";
 
 const EmployeeHome = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector(SelectUser);
+  const backToSignin = () => {
+    navigate("/");
+  };
 
   const [initialCheckedIn, setInitialCheckedIn] = useState([]);
+  useEffect(() => {
+    if (!user) return backToSignin();
+  }, []);
 
   // mainData.forEach((data1) => {
   //   let formdata = new FormData();

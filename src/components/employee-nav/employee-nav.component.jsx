@@ -29,6 +29,11 @@ const EmployeeNav = () => {
             {/* <NavIcon src={DashIcon} /> */}
             Send Request
           </EmployeeNavItem>
+          <EmployeeNavItem onClick={() => Navigate("viewrequests")}>
+            <DashSvg />
+            {/* <NavIcon src={DashIcon} /> */}
+            View Requests
+          </EmployeeNavItem>
           {/* <EmployeeNavItem onClick={() => Navigate("Requests")}>
             <ManageSvg />
             View Requests

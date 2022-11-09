@@ -21,7 +21,6 @@ const AdminHeader = () => {
   const UserState = useSelector(SelectUser);
   const [pageId, setPgeId] = useState("");
   const [userName, setUserName] = useState("");
-  const curUser = useSelector(SelectUser);
 
   useEffect(() => {
     console.log(location);

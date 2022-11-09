@@ -46,6 +46,7 @@ const AddProfileForm = () => {
     if (Object.keys(EmployeeData).length) return;
     Ant();
   }, []);
+  //scxvxvcxvv
   const DefFormFields = {
     personnel_ID: "",
     position: " ",
@@ -226,13 +227,14 @@ const AddProfileForm = () => {
           lg={4}
           InputPosition="form_input"
         />
-        <TextInput
+        <TextDrpDwn
           handleChange={(e) => handleInputChange(e)}
           bg={color}
-          value={priority}
+          lg={3}
           name="priority"
+          options={["High", "Medium", "Low"]}
           label="Priority"
-          lg={4}
+          value={priority}
           InputPosition="form_input"
         />
       </FormRow>
@@ -254,6 +256,15 @@ const AddProfileForm = () => {
           name="dept"
           label="Department"
           InputPosition="form_input"
+        />
+        <TextDrpDwn
+          handleChange={(e) => handleInputChange(e)}
+          bg={color}
+          lg={4}
+          name="dept"
+          options={["dept1", "dept2", "dept3", "dept4", " "]}
+          label="Department"
+          value={dept}
         />
         <TextInput
           handleChange={(e) => handleInputChange(e)}
