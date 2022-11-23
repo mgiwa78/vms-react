@@ -18,7 +18,7 @@ import {
 import { useSelector } from "react-redux";
 import { TextDrpDwn } from "../form-elements/form-elements.component";
 
-const CheckInBrief = ({ name }) => {
+const CheckInBrief = ({ name, size }) => {
   const EmployeeCheckInLog = useSelector(SelectEmployeLog);
   const DefaultMaxPerPage = 10;
   const [pageNumber, SetpageNumber] = useState(1);
@@ -27,7 +27,12 @@ const CheckInBrief = ({ name }) => {
   const [CheckInLog, SetCheckInLog] = useState([]);
   useEffect(() => {
     if (!EmployeeCheckInLog.length) return;
-    SetCheckInLog(EmployeeCheckInLog);
+    console.log(EmployeeCheckInLog);
+    SetCheckInLog(
+      EmployeeCheckInLog.filter(
+        (item) => item.CHECKIN && (!item.CHECKOUT || item.CHECKOUT === "0")
+      )
+    );
     SetpageMax(Math.ceil(EmployeeCheckInLog.length / DefaultMaxPerPage));
   }, [EmployeeCheckInLog]);
 
@@ -78,8 +83,8 @@ const CheckInBrief = ({ name }) => {
           const aTime = a.CHECKIN;
           const bTime = b.CHECKIN;
 
-          if (aTime > bTime) return 1;
-          if (aTime < bTime) return -1;
+          if (aTime < bTime) return 1;
+          if (aTime > bTime) return -1;
           return 0;
         });
 
@@ -138,7 +143,7 @@ const CheckInBrief = ({ name }) => {
     }
   };
   return (
-    <CheckInBriefContainer lg={5}>
+    <CheckInBriefContainer lg={size}>
       <CheckInBriefHeader>
         <CheckInBriefTitle>{name}</CheckInBriefTitle>
         <TextDrpDwn

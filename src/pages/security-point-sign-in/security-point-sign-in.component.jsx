@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import CustomBtn from "../../components/custom-btn/custom-btn.component";
 import { TextInput } from "../../components/form-elements/form-elements.component";
-import { SetlectUserInDb } from "../../php/phpFuncs";
+import { SetlectCheckinUserInDb, SetlectUserInDb } from "../../php/phpFuncs";
 import { SetUserAction } from "../../store/employee/employee-actions";
 import {
   CheckInContainerRight,
@@ -23,7 +23,7 @@ const CheckInPointSignIn = () => {
   const [user, setUser] = useState(null);
 
   const confirmUserLogin = async (userData) => {
-    const [data] = await SetlectUserInDb(userData);
+    const [data] = await SetlectCheckinUserInDb(userData);
 
     if (data) {
       console.log(data);
@@ -83,7 +83,7 @@ const CheckInPointSignIn = () => {
             <CustomBtn
               handleClick={() => {
                 const loginData = {
-                  userType: "check_point_users",
+                  userType: "security_user",
                   userName: securityPointID,
                   userPassword: "DEFAULT",
                 };

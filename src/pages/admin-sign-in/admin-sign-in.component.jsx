@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router";
 import CustomBtn from "../../components/custom-btn/custom-btn.component";
 import { TextInput } from "../../components/form-elements/form-elements.component";
-import { SetlectUserInDb } from "../../php/phpFuncs";
+import { SetlectAdminUserInDb, SetlectUserInDb } from "../../php/phpFuncs";
 import {
   AdminContainerRight,
   AdminForm,
@@ -38,7 +38,7 @@ const AdminSignIn = () => {
   }, [location]);
 
   const confirmUserLogin = async (userData) => {
-    const [data] = await SetlectUserInDb(userData);
+    const [data] = await SetlectAdminUserInDb(userData);
     if (data) {
       const userData = {
         curUserName: data.USERNAME,
@@ -107,7 +107,7 @@ const AdminSignIn = () => {
             <CustomBtn
               handleClick={() => {
                 const loginData = {
-                  userType: "admin_users",
+                  userType: "admin_user",
                   userName: adminName,
                   userPassword: adminPassword,
                 };

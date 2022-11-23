@@ -57,14 +57,23 @@ const AddProfileForm = () => {
     pesRes: "",
     duration: "",
     dept: "",
+    block: "",
   };
 
   const [formFields, SetFormFields] = useState(DefFormFields);
 
   const [startDate, setStartDate] = useState(new Date(1667246643633));
   const [stopDate, setStopDate] = useState(new Date());
-  const { dept, personnel_ID, position, name, priority, purpose, pesRes } =
-    formFields;
+  const {
+    dept,
+    personnel_ID,
+    position,
+    name,
+    priority,
+    purpose,
+    pesRes,
+    block,
+  } = formFields;
   const handleClearFormFileds = (e) => {
     // FetchUniqueUserData(personnel_ID);
     SetFormFields({
@@ -118,13 +127,14 @@ const AddProfileForm = () => {
 
     // FetchUniqueUserData(personnel_ID);
     if (
-      !personnel_ID === "" ||
-      purpose === "" ||
-      name === "" ||
-      position === "" ||
-      pesRes === "" ||
-      priority === "" ||
-      dept === ""
+      (!personnel_ID === "" ||
+        purpose === "" ||
+        name === "" ||
+        position === "" ||
+        pesRes === "" ||
+        priority === "" ||
+        dept === "",
+      block === "")
     ) {
       setBtnState("Update");
       return alert("invalid Fields Found");
@@ -155,6 +165,7 @@ const AddProfileForm = () => {
         duration,
         pesRes,
         priority,
+        block,
       });
       console.log(
         personnel_ID,
@@ -232,7 +243,7 @@ const AddProfileForm = () => {
           bg={color}
           lg={3}
           name="priority"
-          options={["High", "Medium", "Low"]}
+          options={[" ", "High", "Medium", "Low"]}
           label="Priority"
           value={priority}
           InputPosition="form_input"
@@ -248,21 +259,13 @@ const AddProfileForm = () => {
           label="Position"
           value={position}
         />
-        <TextInput
-          handleChange={(e) => handleInputChange(e)}
-          bg={color}
-          lg={4}
-          value={dept}
-          name="dept"
-          label="Department"
-          InputPosition="form_input"
-        />
+
         <TextDrpDwn
           handleChange={(e) => handleInputChange(e)}
           bg={color}
           lg={4}
           name="dept"
-          options={["dept1", "dept2", "dept3", "dept4", " "]}
+          options={[" ", "dept1", "dept2", "dept3", "dept4"]}
           label="Department"
           value={dept}
         />
@@ -274,6 +277,17 @@ const AddProfileForm = () => {
           name="pesRes"
           label="Personel responsible"
           InputPosition="form_input"
+        />
+      </FormRow>
+      <FormRow className="Bttom">
+        <TextDrpDwn
+          handleChange={(e) => handleInputChange(e)}
+          bg={color}
+          lg={12}
+          name="block"
+          options={[" ", "Limpopo bay", "volta", "Block B", "Block C"]}
+          label="Building"
+          value={block}
         />
       </FormRow>
       <FormRow className="Bttom">

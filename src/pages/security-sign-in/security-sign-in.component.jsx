@@ -4,24 +4,24 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import CustomBtn from "../../components/custom-btn/custom-btn.component";
 import { TextInput } from "../../components/form-elements/form-elements.component";
-import { SetlectEmployeeUserInDb, SetlectUserInDb } from "../../php/phpFuncs";
+import { SetlectSecurityUserInDb } from "../../php/phpFuncs";
 import { SetUserAction } from "../../store/employee/employee-actions";
 import {
-  EmployeeContainerRight,
-  EmployeeForm,
-  EmployeeFormBtm,
-  EmployeeRightContainer,
-  EmployeeRightTitle,
-  EmployeeSubText,
-} from "./employee-sign-in.styles";
+  SecurityContainerRight,
+  SecurityForm,
+  SecurityFormBtm,
+  SecurityRightContainer,
+  SecurityRightTitle,
+  SecuritySubText,
+} from "./security-sign-in.styles";
 
-const EmployeeSignIn = () => {
+const SecuritySignIn = () => {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const [user, setUser] = useState(null);
 
   const confirmUserLogin = async (userData) => {
-    const [data] = await SetlectEmployeeUserInDb(userData);
+    const [data] = await SetlectSecurityUserInDb(userData);
     if (data) {
       console.log(data);
       const userData = {
@@ -30,22 +30,19 @@ const EmployeeSignIn = () => {
         curProfileID: data.LOGIN_PROFILE_ID,
       };
       dispatch(SetUserAction({ ...userData }));
-      Navigate("/employee");
+      Navigate("/secutrityhome");
     } else return alert("Invalid User");
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   const DefFormFields = {
-    employeePassword: "",
-    employeeName: "",
+    securityPassword: "",
+    securityName: "",
   };
   const [formFields, setFormFields] = useState({ ...DefFormFields });
 
-  const { employeeName, employeePassword } = formFields;
+  const { securityName, securityPassword } = formFields;
   const handleLoginSubmit = (data) => {
+    console.log(data);
     if (
       data.userType.length === 0 ||
       data.userName.length === 0 ||
@@ -61,48 +58,48 @@ const EmployeeSignIn = () => {
   };
 
   return (
-    <EmployeeContainerRight>
-      <EmployeeRightContainer>
-        <EmployeeRightTitle>Employee sign-in</EmployeeRightTitle>
-        <EmployeeSubText>Enter Employee Id and password</EmployeeSubText>
+    <SecurityContainerRight>
+      <SecurityRightContainer>
+        <SecurityRightTitle>Security sign-in</SecurityRightTitle>
+        <SecuritySubText>Enter Security Id and password</SecuritySubText>
 
-        <EmployeeForm>
+        <SecurityForm>
           <TextInput
             type={"text"}
             label="ID"
-            placeholder="Employee ID"
+            placeholder="Security ID"
             InputPosition="form_input_signIn"
-            value={employeeName}
-            name={"employeeName"}
+            value={securityName}
+            name={"securityName"}
             handleChange={(e) => handleInputChange(e)}
           ></TextInput>
           <TextInput
             label="Password"
             type="password"
-            placeholder="Employee Password"
+            placeholder="Security Password"
             InputPosition="form_input_signIn"
-            value={employeePassword}
-            name={"employeePassword"}
+            value={securityPassword}
+            name={"securityPassword"}
             handleChange={(e) => handleInputChange(e)}
           ></TextInput>
-          <EmployeeFormBtm>
+          <SecurityFormBtm>
             <CustomBtn
               handleClick={() => {
                 const loginData = {
-                  userType: "employee_user",
-                  userName: employeeName,
-                  userPassword: employeePassword,
+                  userType: "security_type",
+                  userName: securityName,
+                  userPassword: securityPassword,
                 };
                 handleLoginSubmit(loginData);
               }}
             >
               Sign In
             </CustomBtn>
-          </EmployeeFormBtm>
-        </EmployeeForm>
-      </EmployeeRightContainer>
-    </EmployeeContainerRight>
+          </SecurityFormBtm>
+        </SecurityForm>
+      </SecurityRightContainer>
+    </SecurityContainerRight>
   );
 };
 
-export default EmployeeSignIn;
+export default SecuritySignIn;

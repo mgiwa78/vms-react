@@ -37,6 +37,7 @@ const EditProfileForm = ({ lg }) => {
     pesRes: "",
     duration: "",
     dept: "",
+    block: " ",
   };
   const dispatch = useDispatch();
 
@@ -57,6 +58,7 @@ const EditProfileForm = ({ lg }) => {
     duration,
     pesRes,
     dept,
+    block,
   } = formFields;
   const [VerificationBtnState, setVerificationBtnState] = useState(
     "Verify and Retrieve"
@@ -76,6 +78,7 @@ const EditProfileForm = ({ lg }) => {
       position &&
       duration &&
       pesRes &&
+      block &&
       priority
     )
       return;
@@ -89,6 +92,7 @@ const EditProfileForm = ({ lg }) => {
       duration,
       pesRes,
       priority,
+      block,
     });
     if (data) {
       setTimeout(() => {
@@ -130,6 +134,7 @@ const EditProfileForm = ({ lg }) => {
         date: UserData.DATE,
         duration: UserData.DURATION,
         pesRes: UserData.PE_RES,
+        block: UserData.BLOCK,
       });
       setStartDate(Number(UserData.DURATION.split("-")[0]));
       setStopDate(Number(UserData.DURATION.split("-")[1]));
@@ -282,6 +287,8 @@ const EditProfileForm = ({ lg }) => {
           label="Department"
           value={dept}
         />
+      </FormRow>
+      <FormRow className="Bttom">
         <TextInput
           handleChange={(e) => handleInputChange(e)}
           value={pesRes}
@@ -290,6 +297,15 @@ const EditProfileForm = ({ lg }) => {
           lg={4}
           InputPosition="form_input"
           label="Personnel responsible"
+        />
+        <TextDrpDwn
+          handleChange={(e) => handleInputChange(e)}
+          bg={color}
+          lg={4}
+          name="block"
+          options={["Limpopo bay", "volta", "Block B", "Block C", " "]}
+          label="Building"
+          value={block}
         />
       </FormRow>
       <FormRow className="Bttom">

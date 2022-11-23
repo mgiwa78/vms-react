@@ -217,9 +217,10 @@ const ApprovalHome = () => {
       priority: approvalItem.PRIORITY,
       purpose: approvalItem.PURPOSE,
       pesRes: approvalItem.REQUESTED_BY,
-      dept: approvalItem.PURPOSE,
+      dept: approvalItem.DEPT,
       endDate: enddate,
       approvalID: approvalItem.APPROVAL_ID,
+      block: approvalItem.BLOCK,
     });
   };
   const months = {
@@ -274,7 +275,7 @@ const ApprovalHome = () => {
             />
             <TextDrpDwn
               sortOption={true}
-              options={["priority", "due date", "name", "purpose"]}
+              options={["", "priority", "due date", "name", "purpose"]}
               handleChange={(e) => handleSortAction(e, displayApprovals)}
             />
           </div>

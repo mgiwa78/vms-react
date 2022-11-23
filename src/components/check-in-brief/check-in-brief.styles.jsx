@@ -5,9 +5,9 @@ export const CheckInBriefContainer = styled(Col)`
   background-color: #fff;
   border-radius: 8px;
   height: max-content;
-  padding: 10px 30px 30px 30px;
+  padding: 10px 30px 60px 30px;
   display: flex;
-  height: 615px;
+  height: 515px;
 
   flex-direction: column;
   border: 1px solid #00000021;
@@ -25,7 +25,7 @@ export const CheckInBriefTableContainer = styled.div`
   border-top: 1px solid #071b729e;
 `;
 export const CheckInBriefTable = styled(Table)`
-  max-width: 600px;
+  max-width: 100%;
 `;
 export const CheckInBriefHeader = styled.div`
   display: flex;

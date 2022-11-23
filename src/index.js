@@ -13,9 +13,15 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
+console.log(
+  process.env.NODE_ENV === "development" ? "/" : process.env.PUBLIC_URL
+);
 root.render(
-  <BrowserRouter>
+  <BrowserRouter
+    basename={
+      process.env.NODE_ENV === "development" ? "" : process.env.PUBLIC_URL
+    }
+  >
     {" "}
     <Provider store={store}>
       <ThemeProvider

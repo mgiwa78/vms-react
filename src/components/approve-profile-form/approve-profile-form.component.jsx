@@ -55,13 +55,22 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
     duration: "",
     dept: "",
     personnel_ID: "",
+    block: "",
   };
   const [formFields, SetFormFields] = useState({ ...approvalsFields });
 
   const [startDate, setStartDate] = useState(Date.now());
   const [stopDate, setStopDate] = useState(new Date());
-  const { dept, personnel_ID, position, name, priority, purpose, pesRes } =
-    formFields;
+  const {
+    dept,
+    personnel_ID,
+    position,
+    name,
+    priority,
+    purpose,
+    pesRes,
+    block,
+  } = formFields;
 
   useEffect(() => {
     console.log(approvalsFields);
@@ -72,7 +81,8 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
       approvalsFields.position === "" ||
       approvalsFields.pesRes === "" ||
       approvalsFields.priority === "" ||
-      approvalsFields.dept === ""
+      approvalsFields.dept === "" ||
+      approvalsFields.block === ""
     )
       return;
     handleGenerateId();
@@ -121,7 +131,8 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
       position === "" ||
       pesRes === "" ||
       priority === "" ||
-      dept === ""
+      dept === "" ||
+      block === ""
     ) {
       setBtnState("Update");
       return alert("invalid Fields Found");
@@ -182,6 +193,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
           pesRes,
           priority,
           appId: Number(approvalsFields.approvalID),
+          block,
         });
 
         if (data) {
@@ -216,7 +228,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
         <TextInput
           handleChange={(e) => handleInputChange(e)}
           bg={color}
-          lg={6}
+          lg={4}
           value={name}
           name="name"
           label="Name"
@@ -249,7 +261,7 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
           name="purpose"
           value={purpose}
           label="Purpose"
-          lg={6}
+          lg={4}
           InputPosition="form_input"
         />
         <TextInput
@@ -258,15 +270,24 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
           value={priority}
           name="priority"
           label="Priority"
-          lg={6}
+          lg={4}
           InputPosition="form_input"
+        />
+        <TextDrpDwn
+          handleChange={(e) => handleInputChange(e)}
+          bg={color}
+          lg={4}
+          name="block"
+          options={["", "Limpopo bay", "volta", "Block B", "Block C"]}
+          label="Building"
+          value={block}
         />
       </FormRow>
       <FormRow className="Bttom">
         <TextInput
           handleChange={(e) => handleInputChange(e)}
           bg={color}
-          lg={6}
+          lg={4}
           value={pesRes}
           name="pesRes"
           label="Personel responsible"
@@ -275,9 +296,10 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
         <TextDrpDwn
           handleChange={(e) => handleInputChange(e)}
           bg={color}
-          lg={3}
+          lg={4}
           name="position"
           options={[
+            "",
             "Employee",
             "IT Personnel",
             "Management",
@@ -289,17 +311,17 @@ const ApproveProfileForm = ({ lg, approvalsFields }) => {
           value={position}
           InputPosition="form_input"
         />
-      </FormRow>
-      <FormRow className="Bttom" style={{ marginBottom: "30px" }}>
-        <TextInput
+        <TextDrpDwn
           handleChange={(e) => handleInputChange(e)}
           bg={color}
-          lg={6}
-          value={dept}
+          lg={4}
           name="dept"
+          options={["", "dept1", "dept2", "dept3", "dept4"]}
           label="Department"
-          InputPosition="form_input"
+          value={dept}
         />
+      </FormRow>
+      <FormRow className="Bttom" style={{ marginBottom: "30px" }}>
         <div className="dateContainer">
           <DatePicker
             className="datePicker"

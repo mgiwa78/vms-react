@@ -67,6 +67,7 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
     duration: "",
     dept: "",
     dateDue: "",
+    block: "",
   };
   const [formFields, SetFormFields] = useState({ ...DefFormFields });
 
@@ -80,6 +81,7 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
     personnel_name,
     duration,
     dateDue,
+    block,
   } = formFields;
 
   const handleClearFormFileds = (e) => {
@@ -163,6 +165,8 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
       )}`;
       const approvalrequest = {
         purpose,
+        dept,
+        block,
         dateRequested: date,
         requestedBy: employee_name,
         timeLength: duration,
@@ -214,6 +218,15 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
           label="Employee Name"
           InputPosition="form_input"
         />
+        <TextDrpDwn
+          handleChange={(e) => handleInputChange(e)}
+          bg={color}
+          lg={4}
+          name="block"
+          options={[" ", "Limpopo bay", "volta", "Block B", "Block C"]}
+          label="Building"
+          value={block}
+        />
       </FormRow>
       <FormRow className="Bttom">
         <TextInput
@@ -231,7 +244,7 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
           bg={color}
           lg={3}
           name="priority"
-          options={["High", "Medium", "Low"]}
+          options={[" ", "High", "Medium", "Low"]}
           label="Priority"
           value={priority}
           InputPosition="form_input"
@@ -253,6 +266,7 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
           lg={3}
           name="position"
           options={[
+            " ",
             "Employee",
             "IT Personnel",
             "Management",
@@ -266,14 +280,14 @@ const EmployeeRquestForm = ({ lg, approvalsFields }) => {
         />
       </FormRow>
       <FormRow className="Bttom" style={{ marginBottom: "30px" }}>
-        <TextInput
+        <TextDrpDwn
           handleChange={(e) => handleInputChange(e)}
           bg={color}
-          lg={6}
-          value={dept}
+          lg={4}
           name="dept"
+          options={[" ", "dept1", "dept2", "dept3", "dept4"]}
           label="Department"
-          InputPosition="form_input"
+          value={dept}
         />
         <TextInput
           handleChange={(e) => handleInputChange(e)}

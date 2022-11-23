@@ -84,7 +84,10 @@ export const CreateNewUserWithData = async (userData) => {
   formdata.append("duration", userData.duration);
   formdata.append("pesRes", userData.pesRes);
   formdata.append("priority", userData.priority);
+  formdata.append("block", userData.block);
+
   formdata.append("appId", userData.appId);
+
   try {
     const Data = await fetch("http://localhost/vms_back/index.php", {
       method: "POST",
@@ -351,6 +354,8 @@ export const AddApprovalReqDataToDb = async (employeeRequestData) => {
   formdata.append("priority", employeeRequestData.priority);
   formdata.append("timeLength", employeeRequestData.timeLength);
   formdata.append("reqById", Number(employeeRequestData.req_by_id));
+  formdata.append("dept", employeeRequestData.dept);
+  formdata.append("block", employeeRequestData.block);
 
   try {
     const Data = await fetch("http://localhost/vms_back/index.php", {
@@ -369,15 +374,92 @@ export const AddApprovalReqDataToDb = async (employeeRequestData) => {
     alert(error);
   }
 };
-export const SetlectUserInDb = async (userLoginData) => {
+export const SetlectAdminUserInDb = async (adminLoginData) => {
   let formdata = new FormData();
   const action = { key: "ACTION", value: 30 };
   formdata.append(action.key, action.value);
 
-  formdata.append("userName", userLoginData.userName);
-  formdata.append("userPassword", userLoginData.userPassword);
-  formdata.append("userType", userLoginData.userType);
-  console.log(userLoginData.userType);
+  formdata.append("userName", adminLoginData.userName);
+  formdata.append("userPassword", adminLoginData.userPassword);
+  formdata.append("userType", adminLoginData.userType);
+  console.log(adminLoginData.userType);
+
+  try {
+    const Data = await fetch("http://localhost/vms_back/index.php", {
+      method: "POST",
+      headers: {
+        // Accept: "application/json",
+        // "Content-Type": "application/json",
+      },
+      body: formdata,
+    })
+      .then((response) => response.json())
+      .then((data) => data);
+    return Data;
+  } catch (error) {
+    alert(error);
+  }
+};
+export const SetlectEmployeeUserInDb = async (EmployeeLoginData) => {
+  let formdata = new FormData();
+  const action = { key: "ACTION", value: 31 };
+  formdata.append(action.key, action.value);
+
+  formdata.append("userName", EmployeeLoginData.userName);
+  formdata.append("userPassword", EmployeeLoginData.userPassword);
+  formdata.append("userType", EmployeeLoginData.userType);
+
+  try {
+    const Data = await fetch("http://localhost/vms_back/index.php", {
+      method: "POST",
+      headers: {
+        // Accept: "application/json",
+        // "Content-Type": "application/json",
+      },
+      body: formdata,
+    })
+      .then((response) => response.json())
+      .then((data) => data);
+    return Data;
+  } catch (error) {
+    alert(error);
+  }
+};
+export const SetlectCheckinUserInDb = async (CheckiuserLoginData) => {
+  let formdata = new FormData();
+  const action = { key: "ACTION", value: 32 };
+  formdata.append(action.key, action.value);
+
+  formdata.append("userName", CheckiuserLoginData.userName);
+  formdata.append("userPassword", CheckiuserLoginData.userPassword);
+  formdata.append("userType", CheckiuserLoginData.userType);
+  console.log(CheckiuserLoginData.userType);
+
+  try {
+    const Data = await fetch("http://localhost/vms_back/index.php", {
+      method: "POST",
+      headers: {
+        // Accept: "application/json",
+        // "Content-Type": "application/json",
+      },
+      body: formdata,
+    })
+      .then((response) => response.json())
+      .then((data) => data);
+    return Data;
+  } catch (error) {
+    alert(error);
+  }
+};
+export const SetlectSecurityUserInDb = async (CheckiuserLoginData) => {
+  let formdata = new FormData();
+  const action = { key: "ACTION", value: 32 };
+  formdata.append(action.key, action.value);
+
+  formdata.append("userName", CheckiuserLoginData.userName);
+  formdata.append("userPassword", CheckiuserLoginData.userPassword);
+  formdata.append("userType", CheckiuserLoginData.userType);
+  console.log(CheckiuserLoginData.userType);
 
   try {
     const Data = await fetch("http://localhost/vms_back/index.php", {

@@ -34,6 +34,7 @@ const CheckInForm = () => {
     position: "",
     dept: "",
     priority: "",
+    block: "",
   };
 
   const [formFields, SetFormFields] = useState(DefFormFields);
@@ -41,8 +42,14 @@ const CheckInForm = () => {
   const [confirmState, setConfirmState] = useState("Confirm Check-in");
   const [VerifyState, setVerifyState] = useState("Verify");
   const [timeParse, setTimeParse] = useState("");
-  const { CheckInID, position, purpose, name, dept, time } = formFields;
+  const { CheckInID, position, purpose, name, dept, time, block } = formFields;
 
+  const setDefaultState = () => {
+    SetFormFields({ ...DefFormFields });
+    setTimeParse("");
+    setConfirmState("Confirm Check-in");
+    setVerifyState("Verify");
+  };
   const fetchLogsData = async () => {
     const data = await FetchCheckInDataInDb({ key: "ACTION", value: 12 });
     dispatch(SetCheckInLogAction(data));
@@ -85,6 +92,7 @@ const CheckInForm = () => {
         (log.ID === CheckInID && !log.CHECKOUT) ||
         (log.ID === CheckInID && log.CHECKOUT === "0")
     );
+
     if (avaLog) {
       setConfirmState("Rejected");
 
@@ -92,10 +100,7 @@ const CheckInForm = () => {
         alert("Rejected");
 
         setTimeout(() => {
-          SetFormFields({ ...DefFormFields });
-          setTimeParse("");
-          setConfirmState("Confirm Check-in");
-          setVerifyState("Verify");
+          setDefaultState();
         }, 500);
       }, 500);
       return;
@@ -106,10 +111,7 @@ const CheckInForm = () => {
         setConfirmState("Rejected");
 
         setTimeout(() => {
-          SetFormFields({ ...DefFormFields });
-          setTimeParse("");
-          setConfirmState("Confirm Check-in");
-          setVerifyState("Verify");
+          setDefaultState();
         }, 500);
       }, 50);
     }
@@ -151,18 +153,32 @@ const CheckInForm = () => {
     if (!ID) alert("Invalid ID");
 
     const [UserData] = await FetchUniqueUserData(ID);
-    if (!UserData) return;
+    if (!UserData) {
+      setDefaultState();
+      alert("Invalid Profile");
+      return;
+    }
     setVerifyState("Verified");
     const getTime = Date.now();
     SetfullUserData({ ...UserData });
+    console.log(UserData);
     SetFormFields({
       ...formFields,
       position: UserData.POSITION,
       name: UserData.NAME,
       dept: UserData.DEPT,
       purpose: UserData.PURPOSE,
+      block: UserData.BLOCK,
       time: getTime,
     });
+
+    const curdate = Date.now();
+    if (curdate > Number(UserData.DURATION.split("-")[0])) {
+      setDefaultState();
+
+      alert("Profile Expired");
+      return;
+    }
   };
 
   return (
@@ -265,6 +281,18 @@ const CheckInForm = () => {
                 bg={"#000"}
                 value={purpose}
                 name="purpose"
+                lg={6}
+              />
+            </ValidUserItem>
+            <ValidUserItem>
+              <ListItem>Block:</ListItem>
+
+              <TextInput
+                InputPosition="form_input"
+                handleChange={(e) => handleInputChange(e)}
+                bg={"#000"}
+                value={block}
+                name="block"
                 lg={6}
               />
             </ValidUserItem>

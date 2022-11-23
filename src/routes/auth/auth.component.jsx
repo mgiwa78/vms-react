@@ -47,6 +47,7 @@ const Auth = () => {
     if (location.pathname === "/") return;
     if (
       location.pathname === "/employeelogin" ||
+      location.pathname === "/secutritylogin" ||
       location.pathname === "/checkpointlogin"
     )
       return;
@@ -94,6 +95,9 @@ const Auth = () => {
         </Button>
         <Button onClick={() => Navigate("employeelogin")} className="NavLink">
           Employee
+        </Button>
+        <Button onClick={() => Navigate("secutritylogin")} className="NavLink">
+          Security
         </Button>
         <Button onClick={() => Navigate("checkpointlogin")} className="NavLink">
           Check-Point

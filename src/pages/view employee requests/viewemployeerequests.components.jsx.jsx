@@ -27,9 +27,11 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ApproveProfileForm from "../../components/approve-profile-form/approve-profile-form.component";
 import { SelectUser } from "../../store/employee/employee-selector";
+import { useNavigate } from "react-router";
 
 const ViewEmployeeReqs = () => {
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
 
   const [filteredArray, SetFilteredArray] = useState({});
   const curUser = useSelector(SelectUser);
@@ -39,7 +41,7 @@ const ViewEmployeeReqs = () => {
   const [allRequests, setAllRequests] = useState([]);
 
   useEffect(() => {
-    console.log(curUser.curProfileID);
+    if (curUser.curProfileID === null) return Navigate("/");
     if (allRequests.length === 0) {
       const FetchRequestsById = async (id) => {
         const a = await FetchRequestsByIdAsync(id);
@@ -48,7 +50,7 @@ const ViewEmployeeReqs = () => {
       };
       FetchRequestsById(curUser.curProfileID);
     }
-  }, [curUser]);
+  }, []);
 
   useEffect(() => {
     console.log(filteredArray);
@@ -186,44 +188,7 @@ const ViewEmployeeReqs = () => {
         break;
     }
   };
-  const [RequestsFields, setRequestsFields] = useState({
-    personnel_ID: "",
-    position: " ",
-    name: "",
-    priority: "",
-    purpose: "",
-    date: "",
-    pesRes: "",
-    duration: "",
-    dept: "",
-  });
 
-  const handleApproveBtn = (e, RequestItem) => {
-    if (
-      !(
-        RequestItem.POSITIION ||
-        RequestItem.NAME ||
-        RequestItem.PRIORITY ||
-        RequestItem.PURPOSE ||
-        RequestItem.REQUESTED_BY ||
-        RequestItem.PURPOSE ||
-        RequestItem.Request_ID
-      )
-    )
-      return;
-    e.preventDefault();
-    const enddate = calcEndTime(RequestItem.TIME_LENGHT);
-    setRequestsFields({
-      position: RequestItem.POSITIION,
-      name: RequestItem.NAME,
-      priority: RequestItem.PRIORITY,
-      purpose: RequestItem.PURPOSE,
-      pesRes: RequestItem.REQUESTED_BY,
-      dept: RequestItem.PURPOSE,
-      endDate: enddate,
-      RequestID: RequestItem.Request_ID,
-    });
-  };
   const months = {
     1: "jan",
     2: "Feb",
@@ -238,24 +203,7 @@ const ViewEmployeeReqs = () => {
     11: "Nov",
     12: "Dec",
   };
-  const calcEndTime = (duration) => {
-    const curDate = Date.now();
-    const timeLenght = () => {
-      if (duration.includes("week")) {
-        const value = Number(duration.split(" ")[0]);
-        return value * 6.048e8;
-      }
-      if (duration.includes("day")) {
-        const value = Number(duration.split(" ")[0]);
-        return value * 8.64e7;
-      }
-      if (duration.includes("month")) {
-        const value = Number(duration.split(" ")[0]);
-        return value * 2.628e9;
-      }
-    };
-    return curDate + timeLenght();
-  };
+
   return (
     <RequetsBody>
       <RequetsReportContainer fluid="true">

@@ -191,6 +191,7 @@ const ApprovalHome = () => {
     pesRes: "",
     duration: "",
     dept: "",
+    block: "",
   });
 
   const handleApproveBtn = (e, approvalItem) => {
@@ -214,10 +215,11 @@ const ApprovalHome = () => {
       priority: approvalItem.PRIORITY,
       purpose: approvalItem.PURPOSE,
       pesRes: approvalItem.REQUESTED_BY,
-      dept: approvalItem.PURPOSE,
+      dept: approvalItem.DEPT,
       endDate: enddate,
       approvalID: approvalItem.APPROVAL_ID,
       status: approvalItem.STATUS,
+      block: approvalItem.BLOCK,
     });
   };
   const months = {

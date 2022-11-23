@@ -24,6 +24,9 @@ import { useNavigate } from "react-router";
 import { SelectUser } from "./store/employee/employee-selector";
 import { useEffect } from "react";
 import ViewEmployeeReqs from "./pages/view employee requests/viewemployeerequests.components.jsx";
+import SecuritySignIn from "./pages/security-sign-in/security-sign-in.component";
+import SecurityDashboard from "./components/security-dashboard/security-dashboard.component";
+import SecurityHome from "./pages/security-home/security-home.component";
 
 function App() {
   const location = useLocation();
@@ -47,6 +50,7 @@ function App() {
         <Route path="/" element={<Auth />}>
           <Route index element={<AdminSignIn />} />
           <Route path="employeelogin" element={<EmployeeSignIn />} />
+          <Route path="secutritylogin" element={<SecuritySignIn />} />
           <Route path="checkpointlogin" element={<CheckInPointSignIn />} />
         </Route>
         <Route path="checkpointhome" element={<CheckPoint />}>
@@ -59,9 +63,13 @@ function App() {
           <Route path="approval" element={<ApprovalHome />} />
           <Route path="report-log" element={<ReportHome />} />
         </Route>
+
         <Route path="employee" element={<EmployeeHome />}>
           <Route index element={<EmployeeRquestForm />} />
           <Route path="viewrequests" element={<ViewEmployeeReqs />} />
+        </Route>
+        <Route path="secutrityhome" element={<SecurityHome />}>
+          <Route index element={<SecurityDashboard />} />
         </Route>
       </Routes>{" "}
     </div>
