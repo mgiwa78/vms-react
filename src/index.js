@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ThemeProvider from "react-bootstrap/ThemeProvider";
@@ -17,10 +17,10 @@ console.log(
   process.env.NODE_ENV === "development" ? "/" : process.env.PUBLIC_URL
 );
 root.render(
-  <BrowserRouter
-    basename={
-      process.env.NODE_ENV === "development" ? "" : process.env.PUBLIC_URL
-    }
+  <HashRouter
+  // basename={
+  //   process.env.NODE_ENV === "development" ? "" : process.env.PUBLIC_URL
+  // }
   >
     {" "}
     <Provider store={store}>
@@ -30,7 +30,7 @@ root.render(
         <App />
       </ThemeProvider>{" "}
     </Provider>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
